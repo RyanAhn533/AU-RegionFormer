@@ -5,7 +5,6 @@
 
 
 ---
-<img width="1337" height="483" alt="화면 캡처 2026-02-24 152434" src="https://github.com/user-attachments/assets/28c9cfde-6c40-45c8-807d-6513cce7a46e" />
 
 
 ## 프로젝트 개요
