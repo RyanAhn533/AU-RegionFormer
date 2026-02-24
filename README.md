@@ -2,6 +2,7 @@
 
 > MediaPipe FaceMesh 랜드마크로 얼굴 부위별 패치(AU)를 추출하고,  
 > Global + AU-Patch Fusion Attention 모델로 감정을 분류하는 End-to-End 파이프라인
+![Uploading image.png…]()
 
 ---
 
