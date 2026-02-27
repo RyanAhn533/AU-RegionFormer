@@ -1,5 +1,8 @@
 AU-Patch Attention FER: An Action-Unit-Aware Facial Expression Recognition Pipeline
 
+<img width="1536" height="1024" alt="ChatGPT Image 2026년 2월 24일 오후 03_31_47" src="https://github.com/user-attachments/assets/4be31431-0bca-4908-b411-c09abf4fcb04" />
+
+
 A fully end-to-end FER pipeline that extracts region-specific AU patches using MediaPipe FaceMesh and fuses them with global facial features via a lightweight Attention-based architecture.
 
 Overview
