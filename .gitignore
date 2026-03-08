@@ -1,0 +1,44 @@
+# Experiment History (local archive, not for GitHub)
+experiment_history/
+
+# Data & Checkpoints
+data/
+*.pt
+*.pth
+*.ckpt
+*.pkl
+*.npy
+*.npz
+*.h5
+*.hdf5
+*.zip
+*.tar.gz
+
+# Outputs
+checkpoints*/
+output*/
+outputs/
+results/*.pt
+results/*.npy
+paper_artifacts/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.eggs/
+*.egg-info/
+*.egg
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/

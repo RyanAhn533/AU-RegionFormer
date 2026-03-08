@@ -1,0 +1,55 @@
+# V4-lite v2: Audio + Bio → Continuous & Binary A/V
+# 2026-grade: Bi-Mamba + Selective Cross-SSM + Uncertainty MTL
+
+paths:
+  base_dir: "/home/jy/260210/precessed_data"
+  index_csv: null  # auto: base_dir/segments_index_train.csv
+  output_dir: "./checkpoints_av_lite_v2"
+  v4_ckpt: null    # V4-full checkpoint for AST teacher (optional)
+
+model:
+  d_model: 128
+  num_tokens: 16        # 160 timesteps / patch_size 10 = 16 tokens
+  n_heads: 4
+  dropout: 0.2
+  d_teacher: 768        # AST dim (0 to disable distillation)
+
+  # ─ Ablation knobs ─
+  bio_variant: "mamba"          # "mamba" (2026) or "tcn" (baseline)
+  bio_n_layers: 2               # Bi-Mamba blocks
+  conditioner: "selective_ssm"  # "selective_ssm" (2026) or "cross_attention" (baseline)
+
+  # ─ Modality dropout (robustness) ─
+  modality_dropout: true
+  p_drop_audio: 0.1      # audio rarely fails
+  p_drop_bio: 0.3        # bio sensor often fails (contact, motion artifact)
+
+training:
+  epochs: 40
+  batch_size: 16
+  lr: 1e-3
+  weight_decay: 0.01
+  n_folds: 6
+  workers: 4
+  amp: true
+  mel_time_bins: 128
+
+loss:
+  # Uncertainty-weighted: σ_i learned automatically
+  # No manual λ_A, λ_V, β_A, β_V needed
+  mu_kd: 0.0             # KD weight (set >0 with v4_ckpt)
+
+gate:
+  tau_start: 2.0          # soft mixing at start
+  tau_end: 0.5            # sharp gating at end
+
+# ─────────────────────────────────────────────────
+# Ablation experiment matrix:
+# ─────────────────────────────────────────────────
+# | Exp | Bio    | Conditioner    | Dropout | Notes          |
+# |-----|--------|----------------|---------|----------------|
+# | A   | mamba  | selective_ssm  | yes     | Full (default) |
+# | B   | tcn    | cross_attention| yes     | Baseline       |
+# | C   | mamba  | cross_attention| yes     | Mamba only     |
+# | D   | tcn    | selective_ssm  | yes     | SSM only       |
+# | E   | mamba  | selective_ssm  | no      | No dropout     |
