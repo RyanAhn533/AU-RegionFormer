@@ -30,6 +30,11 @@ Traditional facial emotion recognition (FER) methods either:
 
 ## System Architecture
 
+![AU-RegionFormer Architecture](Architecture.png)
+
+<details>
+<summary>Architecture Text Diagram (click to expand)</summary>
+
 ```
                     ┌─────────────────────────────────────────────┐
                     │              AU-RegionFormer                │
@@ -65,6 +70,8 @@ Traditional facial emotion recognition (FER) methods either:
   │         4.Nose            │
   │  5.Cheek_L   6.Cheek_R    │
   └────────────────────────────┘
+```
+</details>
 ```
 
 ---
