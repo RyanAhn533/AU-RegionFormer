@@ -4,6 +4,52 @@
 
 **Last updated**: 2026-05-05 · **Phase**: 6 v3 완료 (Q1 evidence 확보), ablation suite 진행 중
 
+![AU-RegionFormer Architecture](Architecture.png)
+
+## 🖼️ Visual gallery
+
+### Phase 6 v3 — preprocessing 검증 (YOLO + mediapipe v4 10-region)
+
+| Korean (Yonsei) | AffectNet |
+|---|---|
+| ![Yonsei v3](experiments/phase6_yonsei_paired/figures/v3_validation/yonsei_train_v3.png) | ![AffectNet v3](experiments/phase6_yonsei_paired/figures/v3_validation/affectnet_v3.png) |
+| **CK+** (lab) | **SFEW Train** (movie stills) |
+| ![CK+ v3](experiments/phase6_yonsei_paired/figures/v3_validation/ckplus_v3.png) | ![SFEW v3](experiments/phase6_yonsei_paired/figures/v3_validation/sfew_train_v3.png) |
+| **AFEW Train** (movie videos) | **AFEW Val** |
+| ![AFEW Train v3](experiments/phase6_yonsei_paired/figures/v3_validation/afew_train_v3.png) | ![AFEW Val v3](experiments/phase6_yonsei_paired/figures/v3_validation/afew_val_v3.png) |
+
+### Ablation visualizations
+![patch_scale ablation](experiments/phase6_yonsei_paired/figures/v3_validation/patch_scale_ablation.png)
+![all variants](experiments/phase6_yonsei_paired/figures/v3_validation/ablation_all_variants.png)
+
+### Pre-Phase 6 report figures (22장)
+
+#### Performance & confusion
+| Version comparison | Per-class F1 | Confusion matrix v2 |
+|---|---|---|
+| ![](outputs/viz/report_figures/01_version_comparison.png) | ![](outputs/viz/report_figures/02_per_class_f1.png) | ![](outputs/viz/report_figures/09_confusion_matrix_v2.png) |
+| **Misclassification flow** | **AU confusion shift** | **Asymmetric confusion** |
+| ![](outputs/viz/report_figures/03_misclassification_flow.png) | ![](outputs/viz/report_figures/11_au_confusion_shift.png) | ![](outputs/viz/report_figures/16_asymmetric_confusion_flow.png) |
+
+#### Architecture & AU attention
+| Identity separation | Emotion classification | Architecture diagram |
+|---|---|---|
+| ![](outputs/viz/report_figures/04_identity_separation.png) | ![](outputs/viz/report_figures/05_emotion_classification_system.png) | ![](outputs/viz/report_figures/06_architecture_diagram.png) |
+| **AU attention heatmap** | **AU similarity matrix** | **Annotator confusion flow** |
+| ![](outputs/viz/report_figures/08_au_attention_heatmap.png) | ![](outputs/viz/report_figures/10_au_similarity_matrix.png) | ![](outputs/viz/report_figures/14_annotator_confusion_flow.png) |
+
+#### Annotator / human study (Yonsei 298 raters)
+| Annotator agreement | Five-signal consistency | Noise tier distribution |
+|---|---|---|
+| ![](outputs/viz/report_figures/07_annotator_agreement.png) | ![](outputs/viz/report_figures/12_five_signal_consistency.png) | ![](outputs/viz/report_figures/13_noise_tier_distribution.png) |
+| **Emotion perception dist** | **Inter-rater agreement** | **Three-signal crossval** |
+| ![](outputs/viz/report_figures/15_emotion_perception_distribution.png) | ![](outputs/viz/report_figures/22_inter_rater_agreement.png) | ![](outputs/viz/report_figures/21_three_signal_crossval.png) |
+
+#### Demographics
+| Professional vs general | Gender | Age × emotion | Fatigue effect |
+|---|---|---|---|
+| ![](outputs/viz/report_figures/17_professional_vs_general.png) | ![](outputs/viz/report_figures/18_gender_comparison.png) | ![](outputs/viz/report_figures/19_age_emotion_recognition.png) | ![](outputs/viz/report_figures/20_fatigue_effect.png) |
+
 ---
 
 ## 🚀 Phase 6 v3 — Cross-cultural transfer (2026-05-04 완료)
