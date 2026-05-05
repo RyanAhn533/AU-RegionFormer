@@ -1,0 +1,89 @@
+# ─── AU-RegionFormer v4 Training Config ───
+# v3 대비 변경:
+#   - AU token pooling in head (CLS+Global+AU_mean+AU_max → 4d)
+#   - roi_spatial: 3 (3x3 multi-point bilinear sampling)
+#   - Stronger augmentation (rotation ±15°, random grayscale)
+#   - Alpha weighting fix for soft targets
+#   - AU coord clamping after mixup
+#   - Reduced label smoothing (0.1 → 0.05, focal loss와 충돌 감소)
+#   - Increased distill_temp (4 → 8, softer KD targets)
+#   - Early stop patience 40 (EMA stabilization 대기)
+#
+# v2 결과: F1=0.8049, acc=80.6% (17%p overfitting)
+# v3 결과: (running)
+# v4 목표: F1 > 0.88, acc > 88%
+
+seed: 42
+
+paths:
+  train_csv: "/mnt/hdd/ajy_25/au_csv/index_train.csv"
+  val_csv: "/mnt/hdd/ajy_25/au_csv/index_val.csv"
+  output_dir: "/home/ajy/AU-RegionFormer/outputs/v4"
+
+# ─── Model ───
+model:
+  backbone: "mobilevitv2_150"
+  pretrained: true
+  d_emb: 384
+
+  roi_mode: "bilinear"
+  roi_spatial: 3               # NEW: 3x3 multi-point sampling (v3: 1)
+
+  n_heads: 8
+  n_fusion_layers: 2
+  dropout: 0.2                 # v3: 0.15 → v4: 0.2
+  gate_init: 0.0
+  drop_path: 0.2               # v3: 0.15 → v4: 0.2
+
+  num_classes: 7
+  head_dropout: 0.35            # v3: 0.3 → v4: 0.35
+  use_au_pool: true             # NEW: AU mean/max pooling in head
+
+# ─── Training ───
+training:
+  epochs: 150                   # v3: 100 → v4: 150 (early stop이 잡아줌)
+  batch_size: 64
+  num_workers: 8
+
+  optimizer: "adamw"
+  base_lr: 2e-4                 # v3: 3e-4 → v4: 2e-4 (더 안정적)
+  weight_decay: 0.08            # v3: 0.05 → v4: 0.08 (stronger regularization)
+
+  # Scheduler: Cosine Warm Restart
+  scheduler: "cosine_warm_restart"
+  warmup_ratio: 0.05
+  min_lr: 1e-6
+  restart_epochs: 40            # v3: 30 → v4: 40 (longer cycles)
+
+  # Loss
+  loss: "focal"
+  focal_gamma: 2.0
+  label_smoothing: 0.05         # v3: 0.1 → v4: 0.05 (focal과 충돌 줄임)
+
+  # Backbone strategy
+  freeze_backbone_epochs: 5     # v3: 3 → v4: 5 (head 안정화 시간 증가)
+  backbone_lr_scale: 0.1
+
+  # Regularization
+  grad_clip_norm: 5.0
+  mixup_alpha: 0.3              # v3: 0.2 → v4: 0.3
+  amp: true
+
+  # EMA
+  ema: true
+  ema_decay: 0.9997             # v3: 0.9998 → v4: 0.9997 (slightly faster EMA)
+
+  # Self-Distillation
+  distill_alpha: 0.3
+  distill_temp: 8.0             # v3: 4.0 → v4: 8.0 (softer teacher targets)
+
+  # Early Stopping
+  early_stop_patience: 40       # v3: 25 → v4: 40
+
+  save_every: 10
+  metric: "f1_macro"
+
+# ─── Augmentation ───
+augmentation:
+  global_img_size: 224
+  normalize: "from_model"

@@ -1,0 +1,47 @@
+# ─── 4-class (high-agreement) baseline — fast iter for Beta delta validation ───
+
+seed: 42
+
+paths:
+  train_csv: "/home/ajy/AU-RegionFormer/data/4emotion_comparison/train_after.csv"
+  val_csv: "/home/ajy/AU-RegionFormer/data/4emotion_comparison/val_4emo.csv"
+  output_dir: "/mnt/hdd/ajy_25/results/4c_base"
+
+model:
+  backbone: "mobilevitv2_100"
+  pretrained: true
+  d_emb: 384
+  roi_mode: "bilinear"
+  roi_spatial: 1
+  n_heads: 8
+  n_fusion_layers: 1
+  dropout: 0.1
+  gate_init: 0.0
+  num_classes: 4
+  head_dropout: 0.2
+  use_beta: false
+
+training:
+  epochs: 30
+  batch_size: 192
+  num_workers: 12
+  optimizer: "adamw"
+  base_lr: 5e-4
+  weight_decay: 0.05
+  scheduler: "cosine_warmup"
+  warmup_ratio: 0.05
+  min_lr: 1e-6
+  loss: "focal"
+  focal_gamma: 2.0
+  label_smoothing: 0.0
+  freeze_backbone_epochs: 2
+  backbone_lr_scale: 0.1
+  grad_clip_norm: 5.0
+  amp: true
+  early_stop_patience: 5
+  save_every: 10
+  metric: "f1_macro"
+
+augmentation:
+  global_img_size: 224
+  normalize: "from_model"

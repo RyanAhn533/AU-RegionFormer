@@ -1,0 +1,82 @@
+# ─── AU-RegionFormer v5: Soft Label + Noise-Aware Training ───
+#
+# v3 대비 변경:
+#   - Soft label (annotator 3인 + cleanlab probability)
+#   - Sample weight (final_quality from 3-stage noise assessment)
+#   - critical(0.4%) 제거됨 (quality < 0.3)
+#   - loss = hard_focal + soft_KL (weighted)
+#
+# v3 결과: F1=0.8074, acc=80.7% (hard label, 80% ceiling)
+# v5 목표: soft label로 ceiling 돌파, 특히 sad/hurt/anxious 개선
+
+seed: 42
+
+paths:
+  train_csv: "/mnt/hdd/ajy_25/au_csv/index_train_full_quality.csv"
+  val_csv: "/mnt/hdd/ajy_25/au_csv/index_val.csv"
+  output_dir: "/home/ajy/AU-RegionFormer/outputs/v5_softlabel"
+
+# ─── Model ───
+model:
+  backbone: "mobilevitv2_150"
+  pretrained: true
+  d_emb: 384
+
+  roi_mode: "bilinear"
+  roi_spatial: 1
+
+  n_heads: 8
+  n_fusion_layers: 2
+  dropout: 0.15
+  gate_init: 0.0
+  drop_path: 0.15
+
+  num_classes: 7
+  head_dropout: 0.3
+  use_au_pool: false          # v4 개선사항은 나중에 별도 실험
+
+# ─── Training ───
+training:
+  epochs: 100
+  batch_size: 32
+  num_workers: 8
+
+  optimizer: "adamw"
+  base_lr: 3e-4
+  weight_decay: 0.05
+
+  scheduler: "cosine_warm_restart"
+  warmup_ratio: 0.05
+  min_lr: 1e-6
+  restart_epochs: 30
+
+  # Loss: hard focal + soft KL 결합
+  loss: "focal"
+  focal_gamma: 2.0
+  label_smoothing: 0.0         # soft label이 이 역할을 대체
+  soft_label_weight: 0.5       # KL loss 비중
+  hard_label_weight: 0.5       # focal loss 비중
+
+  # Backbone strategy
+  freeze_backbone_epochs: 5
+  backbone_lr_scale: 0.1
+
+  # Regularization
+  grad_clip_norm: 5.0
+  mixup_alpha: 0.0             # soft label과 mixup 동시 사용 안 함
+  amp: true
+
+  # EMA
+  ema: true
+  ema_decay: 0.9998
+
+  # Early Stopping
+  early_stop_patience: 25
+
+  save_every: 10
+  metric: "f1_macro"
+
+# ─── Augmentation ───
+augmentation:
+  global_img_size: 224
+  normalize: "from_model"

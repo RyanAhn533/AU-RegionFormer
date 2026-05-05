@@ -1,0 +1,72 @@
+# ─── MobileViTv2 FER + Beta L2 Gate (production) ───
+# Same backbone/data as mobilevit_fer.yaml, adds per-AU-token Beta gating.
+
+seed: 42
+
+paths:
+  raw_train: "/home/ajy/AI_hub_250704/data2/data_processed_korea"
+  raw_val: "/home/ajy/AI_hub_250704/data2/data_processed_korea_validation"
+  csv_dir: "/mnt/hdd/ajy_25/au_csv"
+  train_csv: "/mnt/hdd/ajy_25/au_csv/index_train.csv"
+  val_csv: "/mnt/hdd/ajy_25/au_csv/index_val.csv"
+  output_dir: "/mnt/hdd/ajy_25/results/mobilevit_fer_beta_l2"
+
+preprocess:
+  work_short_side: 800
+  workers: 12
+
+model:
+  backbone: "mobilevitv2_100"
+  pretrained: true
+  d_emb: 384
+
+  roi_mode: "bilinear"
+  roi_spatial: 1
+
+  n_heads: 8
+  n_fusion_layers: 1
+  dropout: 0.1
+  gate_init: 0.0
+
+  num_classes: 7
+  head_dropout: 0.2
+
+  # ── Beta gating ──
+  use_beta: true
+  beta:
+    use_l2: true        # per-AU-token Beta gate
+    l2_mode: "softmax"  # softmax forces token competition (scale degenerates to r=1)
+    use_l3: false       # global vs AU-mean stream gate (off for first run)
+    tau_init: 2.0       # cosine annealed over training to tau_end
+    tau_end: 1.0
+
+training:
+  epochs: 50
+  batch_size: 192
+  num_workers: 12
+  early_stop_patience: 8
+
+  optimizer: "adamw"
+  base_lr: 5e-4
+  weight_decay: 0.05
+
+  scheduler: "cosine_warmup"
+  warmup_ratio: 0.05
+  min_lr: 1e-6
+
+  loss: "focal"
+  focal_gamma: 2.0
+  label_smoothing: 0.0
+
+  freeze_backbone_epochs: 3
+  backbone_lr_scale: 0.1
+
+  grad_clip_norm: 5.0
+  amp: true
+
+  save_every: 10
+  metric: "f1_macro"
+
+augmentation:
+  global_img_size: 224
+  normalize: "from_model"

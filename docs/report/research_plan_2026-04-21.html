@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>AU-RegionFormer 연구 계획 — 2026-04-21</title>
+<style>
+  body {
+    font-family: "Noto Sans KR", -apple-system, sans-serif;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 24px;
+    color: #222;
+    line-height: 1.6;
+    background: #fafaf8;
+  }
+  h1 {
+    border-bottom: 3px solid #222;
+    padding-bottom: 8px;
+    margin-top: 0;
+  }
+  h2 {
+    margin-top: 40px;
+    padding: 10px 16px;
+    background: #222;
+    color: #fff;
+    font-size: 1.3em;
+  }
+  h3 { color: #444; margin-top: 28px; }
+  .meta { color: #666; font-size: 0.9em; }
+  .thesis {
+    border-left: 5px solid #c00;
+    background: #fff5f5;
+    padding: 16px 20px;
+    font-size: 1.05em;
+    font-weight: 500;
+    margin: 16px 0;
+  }
+  .callout {
+    border: 2px solid #c00;
+    background: #fffbe6;
+    padding: 14px 20px;
+    margin: 20px 0;
+    border-radius: 4px;
+  }
+  .ok { color: #090; font-weight: 600; }
+  .no { color: #c00; font-weight: 600; }
+  .wait { color: #d80; font-weight: 600; }
+  .dream { color: #666; font-style: italic; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 12px 0;
+    background: #fff;
+  }
+  th, td {
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th { background: #eee; font-weight: 600; }
+  tr:nth-child(even) td { background: #fafafa; }
+  .phase {
+    display: grid;
+    grid-template-columns: 100px 180px 1fr 120px;
+    gap: 12px;
+    padding: 12px;
+    border-left: 4px solid #888;
+    margin: 10px 0;
+    background: #fff;
+  }
+  .phase.done { border-left-color: #090; }
+  .phase.now { border-left-color: #d80; background: #fffde0; }
+  .phase.next { border-left-color: #888; }
+  .flow {
+    font-family: monospace;
+    background: #222;
+    color: #0f0;
+    padding: 16px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    overflow-x: auto;
+  }
+  .num-big {
+    font-size: 2.5em;
+    font-weight: 700;
+    color: #c00;
+    display: inline-block;
+    min-width: 80px;
+    text-align: center;
+  }
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+  }
+  .kpi {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 14px;
+    border-radius: 4px;
+    text-align: center;
+  }
+  .kpi-label { font-size: 0.85em; color: #666; }
+  .kpi-value { font-size: 1.4em; font-weight: 700; color: #222; margin-top: 4px; }
+  code {
+    background: #f0f0f0;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.9em;
+  }
+  ul li { margin: 4px 0; }
+  .toc {
+    background: #f2f2f2;
+    padding: 16px 24px;
+    border-radius: 6px;
+    margin: 20px 0;
+  }
+  .toc a { color: #036; text-decoration: none; display: block; padding: 2px 0; }
+  .toc a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<h1>AU-RegionFormer 연구 계획</h1>
+<p class="meta">2026-04-21 · 연구 단계: Phase 0.1 완료 → 0.2 대기 · 작성: Claude+JY</p>
+
+<div class="toc">
+<strong>목차</strong>
+<a href="#thesis">1. 연구 Thesis</a>
+<a href="#finding">2. 핵심 발견 (Counterintuitive)</a>
+<a href="#roadmap">3. 로드맵 Phase 0-4</a>
+<a href="#phase01">4. Phase 0.1 결과</a>
+<a href="#next">5. 다음 단계 (Phase 0.2-1.2)</a>
+<a href="#venue">6. Target Venue / 확률</a>
+<a href="#packaging">7. 논문 Packaging</a>
+<a href="#risks">8. 리스크 / 블라인드 스팟</a>
+<a href="#timeline">9. 타임라인</a>
+</div>
+
+<!-- ================================================== -->
+<h2 id="thesis">1. 연구 Thesis</h2>
+
+<div class="thesis">
+한국인 감정 표현에서 <strong>AI 모델이 포착한 핵심 region(mouth)</strong>과
+<strong>심리학 이론이 예측한 region(eyes, Jack 2012 PNAS)</strong>은 괴리가 있다.
+이 괴리는 AU 수준에서 어떻게 나타나며, 298명의 사회적 합의는 어느 쪽에 가까운가?
+</div>
+
+<h3>Novelty 3축</h3>
+<ul>
+  <li><strong>Descriptive</strong> (Phase 1): 대규모 한국인 데이터에서 AI vs Psychology region 괴리 <em>정량화</em></li>
+  <li><strong>Social</strong> (Phase 2): 사회적 합의(298명)가 AI 관점 vs 심리학 관점 중 어느 쪽 지지하는가 <em>검증</em></li>
+  <li><strong>Methodological</strong> (Phase 3): Consensus-aware AU graph learning</li>
+</ul>
+
+<!-- ================================================== -->
+<h2 id="finding">2. 핵심 발견 (Counterintuitive Finding)</h2>
+
+<div class="callout">
+<strong>심리학 (Jack 2012 PNAS)</strong>: East Asian은 <strong>eyes 중심</strong>으로 감정 표현<br>
+<strong>AI 모델 (JY Phase 0.1)</strong>: mouth만 class-discriminative, <strong>eyes는 오히려 class 섞음</strong><br>
+→ <strong>정면 괴리.</strong> 이것이 논문의 Figure 1이 된다.
+</div>
+
+<h3>Phase 0.1c 재측정 — Linear probe accuracy</h3>
+<p><strong>Linear probe accuracy</strong> = embedding 위에 간단한 분류기 얹어서 감정 맞추는 정확도(%). <strong>높을수록 embedding이 감정 구분을 잘 한다</strong>. <span style="color:#888">참고: 무작위 추측 = 25% (4-class)</span></p>
+<p><em>실험 조건: embedding을 L2-정규화 → 차원축소(256) → 로지스틱 회귀 → 3-fold 교차검증, 30K 샘플 (4-class 균등)</em></p>
+<table>
+  <tr><th>Region</th><th>MobileViT acc</th><th>ConvNeXt acc</th><th>vs Random</th><th>해석</th></tr>
+  <tr style="background:#e8f5e8"><td><strong>POOLED 8-region</strong></td><td><strong>80.2%</strong></td><td><strong>81.5%</strong></td><td>+56%p</td><td>v1 학습모델(79.7%) 수준 재현</td></tr>
+  <tr><td><strong>mouth (AI top)</strong></td><td>71.9%</td><td><strong>75.2%</strong></td><td>+50%p</td><td>AI 관점 최강 region</td></tr>
+  <tr><td>nose</td><td>68.7%</td><td>75.0%</td><td>+50%p</td><td>예상외 강함</td></tr>
+  <tr><td>cheek_left</td><td>57.4%</td><td>61.9%</td><td>+37%p</td><td>중간</td></tr>
+  <tr><td>cheek_right</td><td>59.6%</td><td>61.4%</td><td>+36%p</td><td>중간</td></tr>
+  <tr style="background:#fff5e0"><td><strong>eyes_right</strong></td><td>58.2%</td><td>61.7%</td><td>+36%p</td><td>Jack 2012 예측 top — 실제 mouth보다 13-14%p 낮음</td></tr>
+  <tr style="background:#fff5e0"><td><strong>eyes_left</strong></td><td>57.7%</td><td>61.5%</td><td>+36%p</td><td>동일</td></tr>
+  <tr><td>chin</td><td>54.4%</td><td>56.7%</td><td>+30%p</td><td>약함</td></tr>
+  <tr style="background:#ffe0e0"><td><strong>forehead</strong></td><td>39.0%</td><td>45.0%</td><td>+20%p</td><td class="no">가장 약함</td></tr>
+</table>
+<div class="callout">
+<strong>⚠️ 수치 용어 설명</strong><br>
+<strong>Linear probe accuracy</strong>: embedding 위에 간단한 분류기(로지스틱 회귀)를 학습시켜서 얼마나 정확히 감정을 맞추나 — 0~100%. 높을수록 embedding이 감정을 잘 구분함. <strong>Random 25%가 기준선</strong> (4-class이므로 무작위 추측 = 25%).<br><br>
+<strong>초기 실험(버린 것)</strong>: 처음엔 "silhouette score"(클러스터 분리도, 0~1)로 0.007 나와서 "분리 안 됨"으로 오판. 하지만 이건 고차원(6144d/8192d)에서 편향 크고, L2 norm도 안 한 raw 수치라 metric 자체가 부적절했음. Linear probe로 재측정하니 80%+ 나옴 → 원래 embedding은 충분히 좋았다.
+</div>
+
+<!-- ================================================== -->
+<h2 id="roadmap">3. 로드맵 Phase 0-4</h2>
+
+<h3>흐름</h3>
+<pre class="flow">
+Phase 0 (진단 + AU 추출) ─┬─→ Phase 1 (한국형 AU 지도) ─→ Phase 2 (사회적 합의) ─┐
+                         │                                                       ├─→ 논문 submit
+                         └─→ Phase 3 (Graph learning) ─────────────────────────→┤
+                                       ↑                                         │
+                              Phase 4 (Cross-cultural) ←──────────────────────────
+</pre>
+
+<h3>Phase 별 상세</h3>
+
+<div class="phase done">
+<div><strong>Phase 0</strong></div>
+<div>진단 + AU 기초</div>
+<div>
+  <strong>목적</strong>: Graph 할 자격 + AU 단위 추출<br>
+  <strong>실험</strong>: 0.1 region 진단 ✅ / 0.2 Py-Feat AU 추출 / 0.3 per-AU 분석 / 0.4 landmark Fisher / 0.5 v5 postmortem
+</div>
+<div class="ok">0.1 완료</div>
+</div>
+
+<div class="phase next">
+<div><strong>Phase 1</strong></div>
+<div>한국형 AU 지도 (descriptive)</div>
+<div>
+  <strong>목적</strong>: 논문 Figure 1~5 생성<br>
+  <strong>실험</strong>: FACS canonical 검증 / <em>Jack 2012 재검증</em> / 영역 크기·위치 / is_selected subset
+</div>
+<div>4주</div>
+</div>
+
+<div class="phase next">
+<div><strong>Phase 2</strong></div>
+<div>사회적 합의 구조 (social)</div>
+<div>
+  <strong>목적</strong>: AI vs Psych 괴리를 298명이 어느 쪽 지지하나<br>
+  <strong>실험</strong>: annotator disagreement × AU / 298명 decision tree / demographic × AU
+</div>
+<div>4주</div>
+</div>
+
+<div class="phase next">
+<div><strong>Phase 3</strong></div>
+<div>Graph learning (methodological)</div>
+<div>
+  <strong>목적</strong>: Method novelty<br>
+  <strong>실험</strong>: AU graph (41 node) / Sample graph (237K) / Hetero graph / <em>Consensus-aware learning</em>
+</div>
+<div>6주</div>
+</div>
+
+<div class="phase next">
+<div><strong>Phase 4</strong></div>
+<div>Cross-cultural (defensive)</div>
+<div>
+  <strong>목적</strong>: NHB/PNAS 방어<br>
+  <strong>실험</strong>: AffectNet AU 추출 / Korean vs Western dialect matrix / Jack 재검증 on Western
+</div>
+<div>6주</div>
+</div>
+
+<!-- ================================================== -->
+<h2 id="phase01">4. Phase 0.1 결과 요약</h2>
+
+<div class="kpi-grid">
+<div class="kpi">
+  <div class="kpi-label">ConvNeXt POOLED acc</div>
+  <div class="kpi-value" style="color:#090">81.5%</div>
+  <div class="meta">v1 학습모델 초과</div>
+</div>
+<div class="kpi">
+  <div class="kpi-label">MobileViT POOLED acc</div>
+  <div class="kpi-value" style="color:#090">80.2%</div>
+  <div class="meta">v1(79.7%) 수준 재현</div>
+</div>
+<div class="kpi">
+  <div class="kpi-label">Random baseline</div>
+  <div class="kpi-value" style="color:#888">25.0%</div>
+  <div class="meta">4-class uniform</div>
+</div>
+<div class="kpi">
+  <div class="kpi-label">Mouth (AI top)</div>
+  <div class="kpi-value" style="color:#090">75.2%</div>
+  <div class="meta">vs Eyes 61.5% (Jack 2012 예측)</div>
+</div>
+</div>
+
+<h3>결론</h3>
+<ul>
+  <li><strong>Region embedding 충분히 살아있음</strong>: POOLED 80%+ → v1 학습모델 수준</li>
+  <li><strong>AI 관점 top-3</strong>: mouth > nose > cheek/eyes</li>
+  <li><strong>Jack 2012 정량 검증</strong>: eyes 61%, mouth 75% — AI는 mouth 우위 13-14%p</li>
+  <li><strong>Forehead 최약</strong>: 39-45% — 상단 face 신호 약함</li>
+  <li>산출물: <code>outputs/phase0/01c_linear_probe/</code> (linear_probe_acc.png, cm_pooled_*.png, summary.md)</li>
+</ul>
+
+<!-- ================================================== -->
+<h2 id="next">5. 다음 단계</h2>
+
+<h3>승인 대기 중</h3>
+<table>
+  <tr><th>#</th><th>할 것</th><th>Tool</th><th>예상</th></tr>
+  <tr><td class="wait">Phase 0.2</td><td>Py-Feat AU intensity 추출 (237K × 20 AU)</td><td>Py-Feat (pip)</td><td>6-8h</td></tr>
+  <tr><td class="wait">Phase 0.2b</td><td>OpenGraphAU subset 10K 추출 (비교용)</td><td>OpenGraphAU</td><td>4h</td></tr>
+  <tr><td>Phase 0.3</td><td>per-AU linear probe (AU 단위 accuracy)</td><td>sklearn</td><td>1일</td></tr>
+  <tr><td>Phase 0.4</td><td>Landmark 17 feature Fisher</td><td>sklearn</td><td>0.5일</td></tr>
+  <tr><td>Phase 0.5</td><td>Soft label v5 postmortem</td><td>log 분석</td><td>2일</td></tr>
+  <tr><td>Phase 1.1</td><td>FACS canonical 검증 (Happy=AU6+12 한국 재현?)</td><td>0.2 결과 위</td><td>1일</td></tr>
+  <tr><td class="ok">Phase 1.2 ⭐</td><td><strong>Jack 2012 재검증</strong> (eyes-AU vs mouth-AU)</td><td>0.2 결과 위</td><td>1일</td></tr>
+</table>
+
+<h3>병렬 검증 (한국인 validation 필수)</h3>
+<ul>
+  <li>Py-Feat 한국인 AU detection 정확도: KUFEC-II 사용 가능 시 ICC 측정</li>
+  <li>없으면 OpenGraphAU vs Py-Feat 내부 일치도로 proxy</li>
+</ul>
+
+<!-- ================================================== -->
+<h2 id="venue">6. Target Venue / 확률</h2>
+
+<table>
+  <tr><th>우선</th><th>Venue</th><th>IF</th><th>확률</th><th>전략</th></tr>
+  <tr><td>1</td><td><strong>IEEE TAFFC</strong></td><td>11</td><td class="ok">50-60%</td><td>현실 메인 타겟</td></tr>
+  <tr><td>2</td><td>Information Fusion</td><td>18</td><td>25-30%</td><td>Method graph angle 강조 시</td></tr>
+  <tr><td>3</td><td>PNAS Social Sciences</td><td>9.4</td><td>20-25%</td><td>Psychology angle 강조 시</td></tr>
+  <tr><td>4</td><td class="dream">Nature Human Behaviour</td><td>21</td><td class="dream">15-20% (dream)</td><td>심리학 co-author + IRB 추가 시 40-45%</td></tr>
+  <tr><td>5</td><td class="dream">Nature Communications</td><td>16</td><td class="dream">10-15%</td><td>Interdisciplinary</td></tr>
+  <tr><td>safety</td><td>Scientific Reports</td><td>3.8</td><td class="ok">60-70%</td><td>안전망</td></tr>
+</table>
+
+<h3>NHB/PNAS로 올리려면 (아직 미충족)</h3>
+<ol>
+  <li>연세대 심리학과 co-author 영입</li>
+  <li>298명 실험 IRB/pre-registration 문서화</li>
+  <li>Py-Feat 한국인 AU detection validation (KUFEC-II 활용)</li>
+  <li>Korean vs Western 엄밀 curation</li>
+</ol>
+
+<!-- ================================================== -->
+<h2 id="packaging">7. 논문 Packaging</h2>
+
+<table>
+  <tr><th>#</th><th>제목</th><th>Phase</th><th>타겟</th><th>Author</th></tr>
+  <tr><td>1 (main)</td><td>AI vs Psychology in Korean facial emotion: large-scale AU analysis</td><td>1+2+4</td><td>TAFFC / NHB dream</td><td>JY 1저자</td></tr>
+  <tr><td>2 (method)</td><td>Consensus-aware AU graph learning for culturally-situated FER</td><td>3+4</td><td>TAFFC / Information Fusion</td><td>JY 1저자</td></tr>
+  <tr><td>3 (Q2, 석사)</td><td>Landmark × Region benchmark for Korean FER</td><td>0.4+1.3</td><td>ESWA / PR Letters</td><td>석사 1저자</td></tr>
+  <tr><td>4 (별도)</td><td>KMER multimodal driver emotion</td><td>5 (별도)</td><td>ACM MM / ICMI</td><td>미정</td></tr>
+</table>
+
+<!-- ================================================== -->
+<h2 id="risks">8. 리스크 / 블라인드 스팟</h2>
+
+<table>
+  <tr><th>#</th><th>리스크</th><th>영향</th><th>완화책</th></tr>
+  <tr><td>1</td><td>Py-Feat이 서양 얼굴 편향</td><td>Phase 1 결과 신뢰도</td><td>KUFEC-II validation + OpenGraphAU 병행</td></tr>
+  <tr><td>2</td><td>298명 실험 IRB 상태 불명</td><td>NHB 도전 불가</td><td>연세대 담당 교수에게 직접 확인</td></tr>
+  <tr><td>3</td><td>Psychology co-author 없음</td><td>NHB 실제 리젝률↑</td><td>심리학 교수 영입 (2주)</td></tr>
+  <tr><td>4</td><td>AffectNet이 "Western"이 아닌 혼합</td><td>Phase 4 cross-cultural 약화</td><td>KUFEC-II + CK+ 별도 curation</td></tr>
+  <tr><td>5</td><td>ME-GraphAU 대비 method novelty 불충분 우려</td><td>Phase 3 논문 rejection</td><td>Consensus-aware 조합 강조, 한국인 AU dialect를 primary</td></tr>
+  <tr><td>6</td><td>JY가 NHB dream에 집착 → scope creep</td><td>TAFFC도 못 씀</td><td>TAFFC 먼저 submit, NHB 후속 확장 전략 유지</td></tr>
+</table>
+
+<!-- ================================================== -->
+<h2 id="timeline">9. 타임라인 (21주 로드맵)</h2>
+
+<table>
+  <tr><th>주차</th><th>Phase</th><th>산출물</th></tr>
+  <tr><td>1-4</td><td>Phase 0 (진단+AU)</td><td>AU intensity 237K + 진단 보고서</td></tr>
+  <tr><td>5-8</td><td>Phase 1 (한국형 AU 지도)</td><td>논문 Figure 1~5 drafts</td></tr>
+  <tr><td>9-12</td><td>Phase 2 (사회적 합의)</td><td>Section 2 draft</td></tr>
+  <tr><td>13-18</td><td>Phase 3 (Graph learning)</td><td>Method 논문 draft</td></tr>
+  <tr><td>19-24</td><td>Phase 4 (Cross-cultural)</td><td>Main 논문 complete</td></tr>
+  <tr><td>25-28</td><td>Paper writing + internal review</td><td>TAFFC submit</td></tr>
+</table>
+
+<h3>Milestones</h3>
+<ul>
+  <li><strong>M1 (주 4)</strong>: Py-Feat AU 237K 완료 + 한국인 validation 통과</li>
+  <li><strong>M2 (주 8)</strong>: Jack 2012 재검증 결과 — 한국인 AI는 정말 mouth 중심인가 확정</li>
+  <li><strong>M3 (주 12)</strong>: 298명 decision tree — 사회적 합의가 어느 쪽 지지 확정</li>
+  <li><strong>M4 (주 18)</strong>: Consensus-aware graph learning 수치 확보</li>
+  <li><strong>M5 (주 24)</strong>: Cross-cultural 완료, 논문 80% drafting</li>
+  <li><strong>M6 (주 28)</strong>: TAFFC submit</li>
+</ul>
+
+<!-- ================================================== -->
+<h2>부록: 레퍼런스 요약</h2>
+
+<ul>
+  <li><strong>Jack et al. 2012 PNAS</strong> — Facial expressions of emotion are not culturally universal (East Asian = eyes) <a href="https://www.pnas.org/doi/10.1073/pnas.1200155109">link</a></li>
+  <li><strong>Ekman FACS</strong> — Canonical AU mapping (Happy=AU6+12 등) <a href="https://py-feat.org/pages/au_reference.html">py-feat ref</a></li>
+  <li><strong>KUFEC-II</strong> (Korea Univ 2017) — 한국인 FACS stimuli <a href="https://www.frontiersin.org/articles/10.3389/fpsyg.2017.00769/full">link</a></li>
+  <li><strong>Li et al. 2025 SPPS</strong> — Cultural FER systematic review <a href="https://journals.sagepub.com/doi/10.1177/00220221251334811">link</a></li>
+  <li><strong>ME-GraphAU</strong> (ECCV'22) — AU graph SOTA (Phase 3 비교 대상)</li>
+  <li><strong>Koreans vs Americans</strong> (Hogrefe 2022) — 감정 표현 문화 차이</li>
+</ul>
+
+<hr>
+<p class="meta">상세는 <code>/home/ajy/AU-RegionFormer/docs/research_log/STRATEGY.md</code> 참조.</p>
+
+</body>
+</html>

@@ -45,10 +45,14 @@ def evaluate(model, loader, device):
 
     for batch in loader:
         images = batch["image"].to(device, non_blocking=True)
-        au_coords = batch["au_coords"].to(device, non_blocking=True)
         labels = batch["label"].to(device, non_blocking=True)
+        # v2 model uses patches; v1 uses coords. Pick whichever the batch has.
+        if "au_patches" in batch:
+            au_input = batch["au_patches"].to(device, non_blocking=True)
+        else:
+            au_input = batch["au_coords"].to(device, non_blocking=True)
 
-        logits = model(images, au_coords)
+        logits = model(images, au_input)
         loss = F.cross_entropy(logits, labels)
         all_losses.append(loss.item())
 
@@ -522,9 +526,14 @@ def _save_model_summary(model, device, out_dir, img_size=224, num_au=8):
     # FLOPs estimation (rough)
     try:
         from fvcore.nn import FlopCountAnalysis
+        is_v2 = hasattr(model, "patch_enc")
+        patch_size = getattr(model, "patch_size", 96)
         dummy_img = torch.randn(1, 3, img_size, img_size).to(device)
-        dummy_coords = torch.randn(1, num_au, 2).to(device)
-        flops = FlopCountAnalysis(model, (dummy_img, dummy_coords))
+        if is_v2:
+            dummy_au = torch.randn(1, num_au, 3, patch_size, patch_size).to(device)
+        else:
+            dummy_au = torch.randn(1, num_au, 2).to(device)
+        flops = FlopCountAnalysis(model, (dummy_img, dummy_au))
         lines.append(f"FLOPs: {flops.total() / 1e9:.2f} GFLOPs")
     except ImportError:
         lines.append("FLOPs: (install fvcore for FLOPs counting)")
@@ -558,8 +567,15 @@ def _save_latency_benchmark(model, device, out_dir, img_size=224, num_au=8,
                             n_warmup=10, n_runs=50):
     """추론 속도 벤치마크. 논문 Table에 latency/throughput 필수."""
     model.eval()
+    # v2 model takes [B, K, 3, P, P] patches; v1 takes [B, K, 2] coords.
+    is_v2 = hasattr(model, "patch_enc")  # AURegionFormerV2 has patch_enc
+    patch_size = getattr(model, "patch_size", 96)
+
     dummy_img = torch.randn(1, 3, img_size, img_size).to(device)
-    dummy_coords = torch.randn(1, num_au, 2).to(device)
+    if is_v2:
+        dummy_au = torch.randn(1, num_au, 3, patch_size, patch_size).to(device)
+    else:
+        dummy_au = torch.randn(1, num_au, 2).to(device)
 
     results = {}
 
@@ -567,14 +583,14 @@ def _save_latency_benchmark(model, device, out_dir, img_size=224, num_au=8,
     if device.type == "cuda":
         torch.cuda.synchronize()
         for _ in range(n_warmup):
-            model(dummy_img, dummy_coords)
+            model(dummy_img, dummy_au)
         torch.cuda.synchronize()
 
         times = []
         for _ in range(n_runs):
             torch.cuda.synchronize()
             t0 = time.perf_counter()
-            model(dummy_img, dummy_coords)
+            model(dummy_img, dummy_au)
             torch.cuda.synchronize()
             times.append(time.perf_counter() - t0)
 
@@ -585,7 +601,7 @@ def _save_latency_benchmark(model, device, out_dir, img_size=224, num_au=8,
     # CPU benchmark
     model_cpu = model.cpu()
     dummy_img_cpu = dummy_img.cpu()
-    dummy_coords_cpu = dummy_coords.cpu()
+    dummy_coords_cpu = dummy_au.cpu()
 
     for _ in range(n_warmup):
         model_cpu(dummy_img_cpu, dummy_coords_cpu)

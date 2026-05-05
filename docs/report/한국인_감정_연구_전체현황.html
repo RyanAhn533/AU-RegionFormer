@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>한국인 감정 표현의 문화적 구조 분석</title>
+<style>
+body{font-family:-apple-system,'Malgun Gothic','Noto Sans KR',sans-serif;line-height:1.8;color:#222;max-width:900px;margin:0 auto;padding:30px;font-size:10.5pt}
+h1{font-size:20pt;color:#1a1a2e;border-bottom:2px solid #1a1a2e;padding-bottom:10px;margin-top:50px}
+h2{font-size:14pt;color:#16213e;margin-top:35px;border-left:4px solid #0f3460;padding-left:10px}
+h3{font-size:11pt;color:#333;margin-top:20px}
+ul{margin:5px 0 15px 0;padding-left:20px}
+li{margin:4px 0;line-height:1.6}
+table{width:100%;border-collapse:collapse;margin:15px 0;font-size:9.5pt}
+th{background:#1a1a2e;color:#fff;padding:8px;text-align:center}
+td{border:1px solid #ddd;padding:7px;text-align:center}
+tr:nth-child(even){background:#f5f5f5}
+.cover{text-align:center;padding:80px 0;margin-bottom:40px}
+.cover h1{border:none;font-size:26pt}
+.cover p{color:#666;font-size:12pt}
+.result{background:#f8f9fa;border-left:4px solid #0f3460;padding:12px 15px;margin:15px 0}
+.key{background:#e8f4fd;border:1px solid #0f3460;border-radius:4px;padding:10px 15px;margin:15px 0;font-weight:bold;color:#0f3460}
+.fig{text-align:center;margin:20px 0}
+.fig img{max-width:100%;border:1px solid #eee;border-radius:4px}
+.fig p{font-size:9pt;color:#666;margin-top:5px}
+.toc{background:#fafafa;padding:20px;border:1px solid #eee;margin:20px 0}
+.toc ul{columns:2;list-style:none;padding:0}
+.toc li{margin:3px 0;font-size:10pt}
+.toc a{color:#0f3460;text-decoration:none}
+.badge{display:inline-block;padding:2px 8px;border-radius:3px;font-size:8pt;font-weight:bold;color:#fff;margin-left:5px}
+.b-red{background:#e74c3c}
+.b-blue{background:#3498db}
+.b-green{background:#27ae60}
+@media print{body{font-size:9pt}h1{font-size:16pt}h2{font-size:12pt}}
+</style>
+</head>
+<body>
+
+<div class="cover">
+<p>연구 진행 보고서</p>
+<h1>한국인 감정 표현의 문화적 구조 분석<br>및 Graph 기반 모델링 방향</h1>
+<p>2026. 04. | 안준영</p>
+</div>
+
+<div class="toc">
+<h3>목차</h3>
+<ul>
+<li><a href="#s1">1. 연구 요약</a></li>
+<li><a href="#s2">2. 분석 대상 데이터</a></li>
+<li><a href="#s3">3. 분석 결과</a></li>
+<li>&emsp;<a href="#s31">3.1 Feature space — 감정 간 구분 불가</a></li>
+<li>&emsp;<a href="#s32">3.2 모델 개선 — 80% 벽</a></li>
+<li>&emsp;<a href="#s33">3.3 라벨 일치도 — annotator 48-51%</a></li>
+<li>&emsp;<a href="#s34">3.4 혼동 흐름 — 일방향 구조</a></li>
+<li>&emsp;<a href="#s35">3.5 감정 축소 — 89.2%</a></li>
+<li>&emsp;<a href="#s36">3.6 외부 검증 — 298명, 98.7%</a></li>
+<li>&emsp;<a href="#s37">3.7 인구통계 — 체계적 차이</a></li>
+<li>&emsp;<a href="#s38">3.8 물리적 특징 — Landmark 237K</a></li>
+<li>&emsp;<a href="#s39">3.9 라벨 정제 — 실패</a></li>
+<li><a href="#s4">4. 종합</a></li>
+<li><a href="#s5">5. 향후 방향</a></li>
+</ul>
+</div>
+
+<!-- 1 -->
+<h1 id="s1">1. 연구 요약</h1>
+
+<h3>연구 주제</h3>
+<ul>
+<li>한국인 감정 표현에 존재하는 문화적 구조를 정량 분석</li>
+<li>이를 반영한 FER(Facial Expression Recognition) 모델링 방향 수립</li>
+</ul>
+
+<h3>핵심 발견</h3>
+<ul>
+<li>감정 간 AU embedding cosine similarity 0.97-0.99 — feature로 감정 구분 불가</li>
+<li>혼동이 일방향 (슬픔→상처 11.9%, 역방향 0%) — 문화적 규칙 존재</li>
+<li>7감정→4감정 축소 시 80.7%→89.2% — 특정 감정이 bottleneck</li>
+<li>5개 독립 신호 전부 동일 순서 (p&lt;10⁻³⁷) — 재현 가능한 객관적 패턴</li>
+<li>성별/나이에 따라 체계적 차이 (남성+5.3%p, 20대 vs 60대 18.9%p)</li>
+</ul>
+
+<div class="key">결론: CNN/ViT feature 기반 학습의 한계 확인 → 감정 간 "관계"를 학습하는 Graph 기반 접근 필요</div>
+
+<!-- 2 -->
+<h1 id="s2">2. 분석 대상 데이터</h1>
+
+<h2>2.1 AI Hub 원본</h2>
+<ul>
+<li>데이터셋: "한국인 감정인식을 위한 복합 영상"</li>
+<li>피험자: 1,100명 (배우 48%, 일반인 52%)</li>
+<li>감정: 7종 (기쁨, 분노, 슬픔, 중립, 당황, 불안, 상처)</li>
+<li>라벨링: annotator 3명 독립 판정</li>
+<li>학습용: 413,122장 (얼굴 crop), val 51,805장</li>
+<li>AU 영역: 8개 (forehead, eyes×2, nose, cheek×2, mouth, chin)</li>
+</ul>
+
+<h2>2.2 연세대 외부 검증</h2>
+<ul>
+<li>참여자: 298명 (연세대 심리학과)</li>
+<li>과제: 10장 중 "해당 감정 아닌 것" 모두 고르기 (15초 제한)</li>
+<li>대상: 기쁨, 분노, 슬픔, 중립 (4감정)</li>
+<li>규모: 247,490 응답, 242,600장</li>
+<li>핵심: is_selected=1 = "이 감정 아니다" (앱 소스코드 확인)</li>
+<li>결과: 기쁨/중립 미제거, 분노 7.6% 제거, 슬픔 8.1% 제거</li>
+</ul>
+
+<h3>신뢰도 검증</h3>
+<ul>
+<li>2인 교차 평가 (4,720장): 일치율 <strong>98.7%</strong></li>
+<li>원본 annotator와 교차: chi²=424, p&lt;10⁻⁹⁴</li>
+</ul>
+
+<div class="fig"><img src="07_annotator_agreement.png"><p>[그림 1] annotator 일치율 + 연세대 rejection rate</p></div>
+<div class="fig"><img src="22_inter_rater_agreement.png"><p>[그림 2] 2인 교차 일치율 98.7%</p></div>
+
+<!-- 3 -->
+<h1 id="s3">3. 분석 결과</h1>
+
+<!-- 3.1 -->
+<h2 id="s31">3.1 Feature space — 감정 간 구분 불가</h2>
+
+<h3>방법</h3>
+<ul>
+<li>AU-RegionFormer 추출 embedding의 감정 간 cosine similarity 계산</li>
+<li>kNN (k=50) 불일치율 측정</li>
+</ul>
+
+<h3>결과</h3>
+<table>
+<tr><th>감정 쌍</th><th>Cosine Similarity</th></tr>
+<tr><td>anxious - hurt</td><td>0.999</td></tr>
+<tr><td>sad - hurt</td><td>0.997</td></tr>
+<tr><td>angry - anxious</td><td>0.998</td></tr>
+<tr><td>happy - sad</td><td>0.973 (최대 차이)</td></tr>
+</table>
+
+<table>
+<tr><th>감정</th><th>kNN 불일치율</th><th>의미</th></tr>
+<tr><td>happy</td><td>0.155</td><td>이웃 85%가 같은 감정</td></tr>
+<tr><td>angry</td><td>0.317</td><td>이웃 1/3이 다른 감정</td></tr>
+<tr><td>hurt</td><td>0.522</td><td>이웃 절반이 다른 감정</td></tr>
+<tr><td>anxious</td><td>0.543</td><td>이웃 절반 이상 다른 감정</td></tr>
+</table>
+
+<h3>해석</h3>
+<ul>
+<li>모든 감정 쌍 similarity 0.97+ — CNN feature로 구분 불가</li>
+<li>anxious/hurt는 feature space에서 완전 혼재</li>
+</ul>
+
+<div class="key">feature 수준에서 감정이 분리되지 않는다 — CNN/ViT의 구조적 한계</div>
+<div class="fig"><img src="10_au_similarity_matrix.png"><p>[그림 3] 감정 간 AU cosine similarity</p></div>
+
+<!-- 3.2 -->
+<h2 id="s32">3.2 모델 개선 — 80% 벽</h2>
+
+<h3>방법</h3>
+<ul><li>backbone 확장, fusion 추가, EMA, distillation, DropPath 적용</li></ul>
+
+<h3>결과</h3>
+<table>
+<tr><th>버전</th><th>변경</th><th>F1</th><th>Acc</th></tr>
+<tr><td>v1</td><td>MobileViTv2-100, 1 fusion</td><td>0.795</td><td>79.7%</td></tr>
+<tr><td>v2</td><td>MobileViTv2-150, 2 fusion</td><td>0.805</td><td>80.7%</td></tr>
+<tr><td>v3</td><td>+EMA, distill, DropPath</td><td>0.807</td><td>80.8%</td></tr>
+</table>
+
+<h3>해석</h3>
+<ul><li>v1→v3 +1.2%p가 최대 — 모델이 아닌 다른 원인</li></ul>
+
+<div class="fig"><img src="01_version_comparison.png"><p>[그림 4] 버전별 성능</p></div>
+
+<!-- 3.3 -->
+<h2 id="s33">3.3 라벨 일치도 — annotator 48-51%</h2>
+
+<h3>방법</h3>
+<ul><li>원본 JSON annotator 3인 판정 교차 분석</li></ul>
+
+<h3>결과</h3>
+<table>
+<tr><th>감정</th><th>3인 완전 일치</th><th>uploader와 불일치</th></tr>
+<tr><td>기쁨</td><td>96.2%</td><td>8.0%</td></tr>
+<tr><td>중립</td><td>73.6%</td><td>27.0%</td></tr>
+<tr><td>분노</td><td>51.1%</td><td>51.1%</td></tr>
+<tr><td>슬픔</td><td>47.7%</td><td>55.1%</td></tr>
+</table>
+
+<h3>해석</h3>
+<ul>
+<li>슬픔/분노: 전문가 3명 중 절반만 동의</li>
+<li>모델 80%는 이미 annotator 합의 수준 초과</li>
+<li>라벨 모호성은 noise가 아닌 감정 구조 반영</li>
+</ul>
+
+<div class="fig"><img src="15_emotion_perception_distribution.png"><p>[그림 5] 표현 감정 vs annotator 판정</p></div>
+
+<!-- 3.4 -->
+<h2 id="s34">3.4 혼동 흐름 — 일방향 구조</h2>
+
+<h3>방법</h3>
+<ul><li>annotator가 uploader와 다르게 판정한 방향 분석</li></ul>
+
+<h3>결과</h3>
+<table>
+<tr><th>방향</th><th>건수</th><th>비율</th><th>역방향</th></tr>
+<tr><td>슬픔 → 상처</td><td>21,327</td><td>11.9%</td><td>0%</td></tr>
+<tr><td>분노 → 불안</td><td>15,763</td><td>8.8%</td><td>0%</td></tr>
+<tr><td>슬픔 → 불안</td><td>13,900</td><td>7.7%</td><td>0%</td></tr>
+<tr><td>기쁨 ↔ 중립</td><td>2,807</td><td>1.6%</td><td>1.6%</td></tr>
+</table>
+
+<h3>해석</h3>
+<ul>
+<li>"강한 감정 → 약한 감정" 일방향 — 역방향 0%</li>
+<li>무작위 noise가 아닌 문화적 규칙</li>
+</ul>
+
+<div class="key">한국인은 강한 부정 감정을 절제하여 표현 → 약한 감정으로 읽힘</div>
+<div class="fig"><img src="16_asymmetric_confusion_flow.png"><p>[그림 6] 비대칭 혼동 흐름</p></div>
+<div class="fig"><img src="14_annotator_confusion_flow.png"><p>[그림 7] annotator 불일치 상위 흐름</p></div>
+
+<!-- 3.5 -->
+<h2 id="s35">3.5 감정 축소 — 89.2%</h2>
+
+<h3>실험 근거</h3>
+<ul>
+<li>3.1: anxious/hurt kNN 불일치 0.52-0.54</li>
+<li>3.4: 슬픔→상처 21,327건, 분노→불안 15,763건</li>
+<li>이 감정들이 전체 성능을 끌어내리는지 확인</li>
+</ul>
+
+<h3>결과</h3>
+<table>
+<tr><th>실험</th><th>감정 수</th><th>F1</th><th>Acc</th></tr>
+<tr><td>v2 (전체)</td><td>7</td><td>0.805</td><td>80.7%</td></tr>
+<tr><td>4emo (축소)</td><td>4</td><td>0.889</td><td>89.2%</td></tr>
+</table>
+
+<h3>해석</h3>
+<ul><li>+8.5%p — anxious/hurt/surprised가 전체 성능의 직접적 bottleneck</li></ul>
+
+<!-- 3.6 -->
+<h2 id="s36">3.6 외부 검증 — 298명, 98.7%</h2>
+
+<h3>실험 근거</h3>
+<ul><li>3.3~3.5가 annotator 3명만의 특이사항인지 배제 필요</li></ul>
+
+<h3>결과</h3>
+<table>
+<tr><th>검증</th><th>수치</th></tr>
+<tr><td>2인 교차 일치율</td><td>98.7%</td></tr>
+<tr><td>annotator × 연세대</td><td>chi²=424, p&lt;10⁻⁹⁴</td></tr>
+<tr><td>3중 교차 (최고 vs 최저)</td><td>8.7% vs 21.5% (2.5배)</td></tr>
+<tr><td>5개 독립 신호</td><td>전부 동일 순서</td></tr>
+</table>
+
+<h3>해석</h3>
+<ul><li>서로 다른 방법 5개가 전부 같은 결론 — 우연 아닌 객관적 패턴</li></ul>
+
+<div class="fig"><img src="12_five_signal_consistency.png"><p>[그림 8] 5개 신호 일관성</p></div>
+<div class="fig"><img src="21_three_signal_crossval.png"><p>[그림 9] 3중 교차검증</p></div>
+
+<!-- 3.7 -->
+<h2 id="s37">3.7 인구통계 — 체계적 차이</h2>
+
+<h3>실험 근거</h3>
+<ul><li>문화적 경향이면 성별/나이에 따라 체계적 변화 예상</li></ul>
+
+<h3>결과</h3>
+<table>
+<tr><th>변수</th><th>수치</th><th>검정</th></tr>
+<tr><td>남성 분노</td><td>73.2% vs 여성 67.9% (+5.3%p)</td><td>chi²=169, p&lt;10⁻³⁷</td></tr>
+<tr><td>20대 슬픔</td><td>67.0%</td><td></td></tr>
+<tr><td>60대 슬픔</td><td>85.9% (차이 18.9%p)</td><td></td></tr>
+<tr><td>일반인 분노</td><td>73.0% vs 배우 67.3%</td><td>chi²=215, p&lt;10⁻⁴⁹</td></tr>
+</table>
+
+<h3>해석</h3>
+<ul>
+<li>여성 부정감정 표현 더 억제 — 사회적 규범</li>
+<li>젊은 세대일수록 모호 — 세대 간 변화</li>
+<li>배우 연기보다 일반인 자연 표현이 더 정확</li>
+</ul>
+
+<div class="fig"><img src="18_gender_comparison.png"><p>[그림 10] 성별 비교</p></div>
+<div class="fig"><img src="19_age_emotion_recognition.png"><p>[그림 11] 나이대별</p></div>
+<div class="fig"><img src="17_professional_vs_general.png"><p>[그림 12] 배우 vs 일반인</p></div>
+
+<!-- 3.8 -->
+<h2 id="s38">3.8 물리적 특징 — Landmark 237K</h2>
+
+<h3>방법</h3>
+<ul>
+<li>MediaPipe 468 landmark → 17개 수치 (237,350장 전수)</li>
+<li>"확실한 감정" vs "아닌 것" 비교 (t검정, Cohen's d)</li>
+</ul>
+
+<h3>결과</h3>
+<table>
+<tr><th>감정</th><th>핵심 특징</th><th>Cohen's d</th></tr>
+<tr><td>기쁨</td><td>입꼬리 올라감</td><td>d=0.79 (large)</td></tr>
+<tr><td>분노</td><td>입 벌림 + 눈썹 찡그림</td><td>d=0.48 (medium)</td></tr>
+<tr><td>슬픔</td><td>눈 감김</td><td>d=0.43 (medium)</td></tr>
+<tr><td>중립</td><td>입 다물기</td><td>d=0.27 (small)</td></tr>
+</table>
+<ul><li>LDA 분류 (landmark만): 79.2% — 모델(80.7%)과 거의 동일</li></ul>
+
+<h3>해석</h3>
+<ul><li>물리적 차이 존재하나, landmark 차이 = 모델의 ceiling</li></ul>
+
+<!-- 3.9 -->
+<h2 id="s39">3.9 라벨 정제 — 실패</h2>
+
+<h3>방법</h3>
+<ul><li>annotator 분포 → soft label, quality score → sample weight, KL loss</li></ul>
+
+<h3>결과</h3>
+<table>
+<tr><th>실험</th><th>방법</th><th>F1</th></tr>
+<tr><td>v3</td><td>hard label</td><td>0.807</td></tr>
+<tr><td>v5</td><td>soft label + KL</td><td>0.538 (실패)</td></tr>
+</table>
+
+<h3>해석</h3>
+<ul>
+<li>feature 동일(sim 0.97) 상태에서 라벨만 바꿔서는 해결 불가</li>
+<li>구조적 접근 필요</li>
+</ul>
+
+<!-- 4 -->
+<h1 id="s4">4. 종합</h1>
+
+<table>
+<tr><th>#</th><th>발견</th><th>핵심 수치</th></tr>
+<tr><td>1</td><td>feature로 감정 구분 불가</td><td>cosine sim 0.97-0.99</td></tr>
+<tr><td>2</td><td>모델 바꿔도 동일</td><td>v1→v3: +1.2%p</td></tr>
+<tr><td>3</td><td>라벨 자체가 모호</td><td>annotator 47.7-51.1%</td></tr>
+<tr><td>4</td><td>혼동은 일방향</td><td>11.9% vs 0%</td></tr>
+<tr><td>5</td><td>혼동 감정 제거 시 상승</td><td>80.7%→89.2%</td></tr>
+<tr><td>6</td><td>외부 검증 일치</td><td>98.7%, p&lt;10⁻⁹⁴</td></tr>
+<tr><td>7</td><td>인구통계 체계적</td><td>p&lt;10⁻³⁷</td></tr>
+<tr><td>8</td><td>물리적 차이 = ceiling</td><td>LDA 79.2% ≈ 모델 80.7%</td></tr>
+<tr><td>9</td><td>라벨 정제 불가</td><td>soft label F1=0.538</td></tr>
+</table>
+
+<div class="key">
+feature separability ❌ + relational structure ⭕<br>
+→ Graph 기반 관계 학습이 필요
+</div>
+
+<div class="fig"><img src="09_confusion_matrix_v2.png"><p>[그림 13] Confusion Matrix</p></div>
+<div class="fig"><img src="02_per_class_f1.png"><p>[그림 14] 감정별 F1</p></div>
+
+<!-- 5 -->
+<h1 id="s5">5. 향후 방향</h1>
+
+<h2>5.1 왜 Graph인가</h2>
+<ul>
+<li>AU cosine sim 0.97-0.99 → Euclidean space에서 분리 불가</li>
+<li>그러나 AU 간 co-activation 관계는 감정별로 다름</li>
+<li>혼동의 방향성(directed graph)이 문화적 구조 반영</li>
+<li>→ feature가 아닌 relational structure로 구분</li>
+</ul>
+
+<h3>관련 선행 (2024-2026)</h3>
+<ul>
+<li>Adaptive Graph Convolution for AU <span class="badge b-red">AAAI 2025</span></li>
+<li>Causal AU Relationship Discovery <span class="badge b-red">NeurIPS 2024</span></li>
+<li>EmotiGraph: Heterogeneous Graph <span class="badge b-red">CVPR 2024</span></li>
+<li>Emotion-Topology-Aware Smoothing <span class="badge b-red">NeurIPS 2024</span></li>
+</ul>
+
+<h2>5.2 적용 가능 구조</h2>
+<table>
+<tr><th>구조</th><th>적용</th><th>기대</th></tr>
+<tr><td>GNN / GAT</td><td>AU 관계 graph 학습</td><td>feature 한계 돌파</td></tr>
+<tr><td>MoE</td><td>인구통계 subgroup별 expert</td><td>자동 보정</td></tr>
+<tr><td>Multimodal Graph</td><td>face + audio + bio 노드</td><td>표정 한계 보완</td></tr>
+<tr><td>VLM / CLIP</td><td>한국 문화 prompting</td><td>context 주입</td></tr>
+<tr><td>Evidential</td><td>모호 vs 무지 분리</td><td>uncertainty 정량화</td></tr>
+</table>
+
+<h2>5.3 선행 연구 Gap (0편)</h2>
+<ul>
+<li>한국인 AU relationship graph 학습</li>
+<li>Confusion flow를 directed graph edge로</li>
+<li>Annotator disagreement + Graph 결합</li>
+<li>Culture-specific AU Shapley</li>
+<li>Bio signal as graph context node</li>
+</ul>
+
+<h2>5.4 논문 타겟</h2>
+<table>
+<tr><th>타겟</th><th>IF / Rank</th><th>이유</th></tr>
+<tr><td>IEEE TAFFC</td><td>IF~11, Q1</td><td>감정 전문 + 문화 분석</td></tr>
+<tr><td>ACM MM</td><td>Top-tier</td><td>멀티모달 + 그래프</td></tr>
+<tr><td>AAAI</td><td>Top-tier</td><td>방법론 novelty</td></tr>
+<tr><td>Pattern Recognition</td><td>IF~8, Q1</td><td>실험 중심</td></tr>
+</table>
+
+</body>
+</html>

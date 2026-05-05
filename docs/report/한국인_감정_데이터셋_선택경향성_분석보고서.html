@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>한국인 감정 데이터셋 선택 경향성 분석 보고서</title>
+<style>
+  @page { size: A4; margin: 20mm; }
+  body {
+    font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
+    line-height: 1.8;
+    color: #333;
+    max-width: 210mm;
+    margin: 0 auto;
+    padding: 20px 30px;
+    font-size: 11pt;
+  }
+  h1 {
+    text-align: center;
+    font-size: 20pt;
+    border-bottom: 3px solid #2c3e50;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+    color: #2c3e50;
+  }
+  h2 {
+    font-size: 15pt;
+    color: #2c3e50;
+    border-left: 5px solid #3498db;
+    padding-left: 12px;
+    margin-top: 40px;
+    margin-bottom: 15px;
+  }
+  h3 {
+    font-size: 12pt;
+    color: #34495e;
+    margin-top: 25px;
+    margin-bottom: 10px;
+  }
+  .summary-box {
+    background: #f0f4f8;
+    border: 1px solid #bdc3c7;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+  }
+  .summary-box h3 { margin-top: 0; color: #2c3e50; }
+  .summary-box ul { margin: 5px 0; padding-left: 20px; }
+  .summary-box li { margin: 4px 0; }
+  .highlight { background: #fff3cd; padding: 2px 5px; border-radius: 3px; font-weight: bold; }
+  .finding { background: #d4edda; padding: 2px 5px; border-radius: 3px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    font-size: 10pt;
+  }
+  th {
+    background: #2c3e50;
+    color: white;
+    padding: 10px 8px;
+    text-align: center;
+    font-weight: bold;
+  }
+  td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  tr:nth-child(even) { background: #f9f9f9; }
+  tr:hover { background: #e8f4fd; }
+  .figure-container {
+    text-align: center;
+    margin: 25px 0;
+    page-break-inside: avoid;
+  }
+  .figure-container img {
+    max-width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  .figure-caption {
+    font-size: 9.5pt;
+    color: #666;
+    margin-top: 8px;
+    font-style: italic;
+  }
+  .method-box {
+    background: #eef2f7;
+    border-left: 4px solid #3498db;
+    padding: 15px;
+    margin: 15px 0;
+    font-size: 10pt;
+  }
+  .method-box strong { color: #2c3e50; }
+  .insight-box {
+    background: #fef9e7;
+    border-left: 4px solid #f39c12;
+    padding: 15px;
+    margin: 15px 0;
+  }
+  .meta-info {
+    text-align: center;
+    color: #7f8c8d;
+    font-size: 10pt;
+    margin-bottom: 30px;
+  }
+  .toc {
+    background: #fafafa;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin: 20px 0;
+  }
+  .toc a { color: #2c3e50; text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  .page-break { page-break-before: always; }
+  .arrow-right { color: #e74c3c; font-weight: bold; }
+  .arrow-both { color: #3498db; font-weight: bold; }
+</style>
+</head>
+<body>
+
+<h1>한국인 감정 데이터셋<br>선택 경향성 분석 보고서</h1>
+
+<div class="meta-info">
+  AI Hub "한국인 감정인식을 위한 복합 영상" 데이터셋 분석<br>
+  2026년 4월
+</div>
+
+<!-- ============================================================ -->
+<div class="summary-box">
+<h3>요약</h3>
+<p>
+AI Hub "한국인 감정인식을 위한 복합 영상" 데이터셋(피험자 1,100명, 7감정, ~240K장)에 대해 연세대에서 298명을 대상으로 수행한 감정 라벨 검증 실험 데이터를 분석하였다. 본 분석에서는 검증 실험의 부정 선택("해당 감정 아님") 데이터를 인구통계학적·감정 구조적 변수별로 분해하고, 원본 annotator 3인 라벨과 교차검증하여 한국인의 감정 인식 경향성을 도출하였다.
+</p>
+<ul>
+  <li>긍정 감정(기쁨)은 <span class="highlight">96.2%</span> 일치로 보편적 인식. 부정 감정(슬픔 68.2%, 분노 70.3%)은 구조적으로 모호</li>
+  <li>부정 감정의 혼동은 <span class="highlight">일방향</span>(슬픔→상처 11.9%, 역방향 0%) — 강한 감정이 약한 감정으로 읽히는 문화적 절제 경향</li>
+  <li>남성의 부정 감정 표현이 여성보다 명확(분노 <span class="highlight">+5.3%p</span>, 슬픔 +3.8%p)</li>
+  <li>20대의 슬픔 인식률이 가장 낮음(67.0%), 60대(85.9%)와 <span class="highlight">18.9%p</span> 차이</li>
+  <li>전문인(배우)보다 일반인의 감정 인식률이 높음(분노 <span class="highlight">-5.7%p</span>)</li>
+  <li>5개 독립 신호가 전부 같은 순서로 일관 — 경향성의 통계적 유의성 확인(모두 p &lt; 10<sup>-37</sup>)</li>
+</ul>
+</div>
+
+<!-- ============================================================ -->
+<div class="toc">
+<strong>목차</strong><br><br>
+1. <a href="#sec1">데이터셋 개요</a><br>
+2. <a href="#sec2">연세대 검증 실험</a><br>
+3. <a href="#sec3">분석 가설</a><br>
+4. <a href="#sec4">분석 방법 및 통계 검정</a><br>
+5. <a href="#sec5">분석 결과</a><br>
+&emsp;5.1 감정별 인식 명확도<br>
+&emsp;5.2 혼동의 비대칭 구조<br>
+&emsp;5.3 전문인(배우) vs 일반인<br>
+&emsp;5.4 피험자 성별 차이<br>
+&emsp;5.5 나이대별 차이<br>
+&emsp;5.6 평가자 피로도 효과<br>
+&emsp;5.7 피험자 내 감정 간 상관<br>
+6. <a href="#sec6">교차검증</a><br>
+7. <a href="#sec7">해석 및 시사점</a><br>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="sec1">1. 데이터셋 개요</h2>
+
+<h3>1.1 원본 데이터 (AI Hub)</h3>
+<p>"한국인 감정인식을 위한 복합 영상" 데이터셋은 한국인의 감정 표현 영상을 수집·라벨링한 대규모 데이터셋이다.</p>
+
+<table>
+  <tr><th>항목</th><th>내용</th></tr>
+  <tr><td>피험자</td><td>1,100명 (전문인 48%, 일반인 52%)</td></tr>
+  <tr><td>감정</td><td>기쁨, 분노, 슬픔, 중립, 당황, 불안, 상처 (7종)</td></tr>
+  <tr><td>촬영</td><td>감정 유도 후 다양한 배경(10종)에서 촬영</td></tr>
+  <tr><td>라벨링</td><td>annotator 3인 독립 판정 (감정 + bounding box)</td></tr>
+  <tr><td>규모</td><td>~240K장 (해제된 4감정 기준)</td></tr>
+</table>
+
+<p><strong>피험자 유형:</strong></p>
+<ul>
+  <li><strong>전문인</strong>: 배우/연기자 — 감정 표현 훈련 경험이 있는 전문가</li>
+  <li><strong>일반인</strong>: 연기 경험 없는 일반 참여자</li>
+</ul>
+
+<p><strong>라벨 구조:</strong> 각 사진에 대해 <code>faceExp_uploader</code>(촬영 시 의도한 감정)와 annotator 3인(<code>annot_A/B/C</code>)의 독립 감정 판정이 기록됨.</p>
+
+<h3>1.2 연세대 검증 실험</h3>
+<p>연세대 심리학과에서 수행한 외부 검증 실험으로, 원본 데이터의 감정 라벨 품질을 독립적으로 평가하였다.</p>
+
+<table>
+  <tr><th>항목</th><th>내용</th></tr>
+  <tr><td>평가자</td><td>298명 (연세대 심리학과 학생, 실험 참가 크레딧 부여)</td></tr>
+  <tr><td>과제</td><td>"해당 감정에 해당하지 <strong>않는</strong> 이미지를 모두 고르세요"</td></tr>
+  <tr><td>구조</td><td>90세트 × 10장/세트, 제한시간 15초/세트</td></tr>
+  <tr><td>대상 감정</td><td>기쁨, 분노, 슬픔, 중립 (4감정)</td></tr>
+  <tr><td>규모</td><td>247,490 응답, 242,600 고유사진</td></tr>
+</table>
+
+<div class="insight-box">
+<strong>핵심 설계:</strong> <code>is_selected = 1</code>은 <strong>"이 사진은 해당 감정이 아니다"</strong>라는 부정 선택을 의미. (앱 소스코드 <code>app.py</code>에서 확인)
+</div>
+
+<!-- ============================================================ -->
+<h2 id="sec2">2. 연세대 검증 실험 상세</h2>
+
+<p>평가자는 Streamlit 기반 웹 앱을 통해 실험에 참여하였다. 각 세트에서 하나의 감정(기쁨/분노/슬픔/중립 중 무작위 배정)에 대해 10장의 사진이 제시되며, 평가자는 해당 감정에 해당하지 <strong>않는</strong> 사진을 복수 선택한다.</p>
+
+<ul>
+  <li>1인당 약 830장 평가 (90세트 × ~10장)</li>
+  <li>세트당 제한시간 15초 → 사진당 약 1.5초 판단</li>
+  <li>30세트마다 30초 휴식</li>
+  <li>"명확한 답이 없을 경우에는 선택하지 않아도 괜찮습니다"라는 안내 제공</li>
+</ul>
+
+<p><strong>연세대 최종 필터링 결과:</strong> 검증 후 235,156장을 최종 유지 목록으로 확정하였다.</p>
+
+<table>
+  <tr><th>감정</th><th>유지 장수</th><th>원본 대비</th><th>제거율</th></tr>
+  <tr><td>기쁨</td><td>63,030</td><td>~100%</td><td>~0%</td></tr>
+  <tr><td>중립</td><td>61,987</td><td>~100%</td><td>~0%</td></tr>
+  <tr><td>분노</td><td>55,175</td><td>92.4%</td><td><strong>7.6%</strong></td></tr>
+  <tr><td>슬픔</td><td>54,964</td><td>91.9%</td><td><strong>8.1%</strong></td></tr>
+</table>
+
+<!-- ============================================================ -->
+<h2 id="sec3">3. 분석 가설</h2>
+
+<div class="insight-box">
+"한국인이 특정 감정을 '아니다'라고 판단하는 데에는 감정 유형, 피험자 인구통계(성별/나이), 표현 전문성에 따른 <strong>체계적 경향성</strong>이 존재하며, 이 경향성은 독립적인 annotator 라벨과도 일치한다."
+</div>
+
+<p>이 가설을 검증하기 위해, 연세대 설문의 "아님" 선택 데이터를 다음 변수별로 분해하고 통계 검정을 수행하였다:</p>
+<ul>
+  <li>감정 유형 (기쁨/분노/슬픔/중립)</li>
+  <li>피험자 성별 (남/여)</li>
+  <li>피험자 나이대 (10~60대)</li>
+  <li>피험자 유형 (전문인/일반인)</li>
+  <li>평가자 피로도 (세트 순서)</li>
+</ul>
+
+<!-- ============================================================ -->
+<div class="page-break"></div>
+<h2 id="sec4">4. 분석 방법 및 통계 검정</h2>
+
+<h3>4.1 카이제곱 검정 (Chi-square test)</h3>
+<div class="method-box">
+<strong>목적:</strong> 두 범주형 변수 간에 통계적으로 유의한 연관이 있는지 확인.<br>
+<strong>사용 이유:</strong> "감정 유형"과 "아님 선택 여부" 등 범주×범주 조합의 독립성 검정.<br>
+<strong>해석:</strong> p < 0.05면 유의한 연관, chi² 값이 클수록 연관 강도가 큼.
+</div>
+
+<table>
+  <tr><th>비교</th><th>chi²</th><th>p-value</th><th>결론</th></tr>
+  <tr><td>감정 유형 × 아님 선택</td><td>5,913</td><td>≈0</td><td>감정에 따라 선택률 유의하게 다름</td></tr>
+  <tr><td>annotator 3인 일치 × 아님 선택</td><td>424</td><td>2.7×10<sup>-94</sup></td><td>일치 여부가 선택과 연관</td></tr>
+  <tr><td>majority=uploader × 아님 선택</td><td>579</td><td>7.3×10<sup>-128</sup></td><td>uploader 라벨 정확도와 연관</td></tr>
+  <tr><td>전문인 여부 × 아님 선택</td><td>215</td><td>9.5×10<sup>-49</sup></td><td>전문인/일반인에 따라 차이</td></tr>
+  <tr><td>피험자 성별 × 아님 선택</td><td>169</td><td>1.9×10<sup>-37</sup></td><td>성별에 따라 차이</td></tr>
+</table>
+
+<h3>4.2 독립표본 t검정 (t-test)</h3>
+<div class="method-box">
+<strong>목적:</strong> 두 집단의 연속형 변수 평균이 유의하게 다른지 확인.<br>
+<strong>사용 이유:</strong> "아님" 선택 사진 vs 미선택 사진의 피험자 나이, 프레임 번호 비교.<br>
+<strong>해석:</strong> p < 0.05면 두 집단 평균이 유의하게 다름.
+</div>
+
+<table>
+  <tr><th>비교</th><th>t값</th><th>p-value</th><th>결론</th></tr>
+  <tr><td>나이 × 아님 선택</td><td>-1.22</td><td>0.224</td><td><strong>유의하지 않음</strong></td></tr>
+  <tr><td>프레임 번호 × 아님 선택</td><td>3.13</td><td>0.002</td><td>통계 유의하나 실질 차이 미미</td></tr>
+</table>
+
+<h3>4.3 Odds Ratio (교차비)</h3>
+<div class="method-box">
+<strong>목적:</strong> 특정 조건이 있을 때 "아님" 선택 확률이 없을 때 대비 몇 배인지 계산.<br>
+<strong>사용 이유:</strong> chi-square는 "차이 유무"만 알려주지만, OR은 <strong>"차이의 크기"</strong>를 정량화.<br>
+<strong>해석:</strong> OR=1.0이면 차이 없음, OR < 1.0이면 해당 조건에서 "아님" 확률 감소.
+</div>
+
+<table>
+  <tr><th>조건</th><th>Odds Ratio</th><th>해석</th></tr>
+  <tr><td>annotator 3인 일치</td><td><strong>0.772</strong></td><td>3인 일치 시 "아님" 선택 확률 23% 감소</td></tr>
+  <tr><td>majority = uploader</td><td><strong>0.718</strong></td><td>다수의견 일치 시 "아님" 확률 28% 감소</td></tr>
+</table>
+
+<h3>4.4 Cohen's h (효과 크기)</h3>
+<div class="method-box">
+<strong>목적:</strong> 두 비율 간 차이의 실질적 의미 측정.<br>
+<strong>사용 이유:</strong> 24만 건 데이터에서 chi-square는 작은 차이도 유의하게 나옴. Cohen's h는 <strong>"실제로 의미 있는 차이인가?"</strong>를 판단.<br>
+<strong>해석:</strong> |h| < 0.2: small, 0.2~0.5: medium, ≥ 0.5: large.
+</div>
+
+<table>
+  <tr><th>비교 (3인일치 vs 불일치)</th><th>Cohen's h</th><th>판정</th></tr>
+  <tr><td>기쁨</td><td>0.076</td><td>small</td></tr>
+  <tr><td>분노</td><td>0.052</td><td>small</td></tr>
+  <tr><td><strong>슬픔</strong></td><td><strong>0.171</strong></td><td><strong>small (medium 근접)</strong></td></tr>
+  <tr><td>중립</td><td>0.022</td><td>negligible</td></tr>
+</table>
+
+<h3>4.5 Pearson 상관계수</h3>
+<div class="method-box">
+<strong>목적:</strong> 두 연속 변수 간 선형 관계의 방향과 강도 측정.<br>
+<strong>사용 이유:</strong> 피험자 내 감정 간 "아님" 선택률 상관, 세트 번호와 선택률 관계 등.<br>
+<strong>해석:</strong> |r| < 0.3: 약한 상관, 0.3~0.7: 중간, ≥ 0.7: 강한 상관.
+</div>
+
+<table>
+  <tr><th>비교</th><th>r</th><th>p</th><th>해석</th></tr>
+  <tr><td>분노×슬픔 rejection (피험자 내)</td><td><strong>0.340</strong></td><td>&lt;0.001</td><td>부정 감정 표현력이 피험자 수준 특성</td></tr>
+  <tr><td>세트 번호 vs rejection rate</td><td><strong>-0.633</strong></td><td>≈0</td><td>후반으로 갈수록 판단 느슨 (피로도)</td></tr>
+  <tr><td>기쁨×중립 rejection</td><td>0.072</td><td>—</td><td>거의 독립</td></tr>
+</table>
+
+<h3>4.6 로지스틱 회귀</h3>
+<div class="method-box">
+<strong>목적:</strong> 여러 변수의 동시 투입 시 "아님" 선택 예측력 및 변수 중요도 확인.<br>
+<strong>사용 이유:</strong> 개별 검정은 변수 하나씩만 봄. 로지스틱 회귀는 <strong>변수 간 교호작용을 통제</strong>하고 순수 기여도를 분리.<br>
+<strong>결과:</strong> AUC = 0.553 — 메타데이터만으로는 예측력 제한적. <strong>사진 내용(visual feature)이 핵심 변수.</strong>
+</div>
+
+<table>
+  <tr><th>변수</th><th>|coefficient|</th><th>방향</th></tr>
+  <tr><td>majority≠uploader</td><td><strong>0.113</strong></td><td>"아님"↑ (가장 강한 예측 변수)</td></tr>
+  <tr><td>annotator 3인일치</td><td><strong>0.090</strong></td><td>"아님"↓</td></tr>
+  <tr><td>피험자 성별</td><td>0.053</td><td>약한 기여</td></tr>
+  <tr><td>프레임 번호</td><td>0.023</td><td>거의 무관</td></tr>
+  <tr><td>나이</td><td>0.012</td><td>거의 무관</td></tr>
+</table>
+
+<h3>4.7 Inter-rater Agreement (평가자 간 일치율)</h3>
+<div class="method-box">
+<strong>목적:</strong> 같은 사진을 본 2명 이상의 평가자가 같은 판단을 하는지 확인. 평가 자체의 <strong>신뢰도</strong> 검증.<br>
+<strong>사용 이유:</strong> 사진당 1명만 평가한 경우가 대부분이라, 평가의 객관성에 대한 검증 필요.<br>
+<strong>결과:</strong> 2명 이상 평가한 4,720장에서 <strong>전체 98.7% 일치</strong>.
+</div>
+
+<!-- ============================================================ -->
+<div class="page-break"></div>
+<h2 id="sec5">5. 분석 결과</h2>
+
+<h3>5.1 감정별 인식 명확도</h3>
+
+<p>피험자가 특정 감정을 표현했을 때, annotator 3인이 동일 감정으로 인식한 비율:</p>
+
+<table>
+  <tr><th>감정</th><th>동일 인식률</th><th>주요 혼동 대상</th></tr>
+  <tr><td>기쁨</td><td><strong>96.2%</strong></td><td>중립(1.6%)</td></tr>
+  <tr><td>중립</td><td><strong>88.8%</strong></td><td>불안(3.0%), 슬픔(2.2%)</td></tr>
+  <tr><td>분노</td><td><strong>70.3%</strong></td><td>불안(8.8%), 중립(5.5%), 상처(5.0%)</td></tr>
+  <tr><td>슬픔</td><td><strong>68.2%</strong></td><td>상처(11.9%), 불안(7.7%), 중립(7.1%)</td></tr>
+</table>
+
+<div class="figure-container">
+  <img src="15_emotion_perception_distribution.png" alt="Emotion Perception Distribution">
+  <div class="figure-caption">그림 1. 피험자가 표현한 감정 vs annotator가 인식한 감정 분포</div>
+</div>
+
+<div class="figure-container">
+  <img src="07_annotator_agreement.png" alt="Annotator Agreement">
+  <div class="figure-caption">그림 2. 감정별 annotator 일치율 및 연세대 검증 rejection rate</div>
+</div>
+
+<!-- 5.2 -->
+<h3>5.2 혼동의 비대칭 구조</h3>
+
+<table>
+  <tr><th>혼동 방향</th><th>비율</th><th>역방향</th><th>특성</th></tr>
+  <tr><td>슬픔 <span class="arrow-right">→</span> 상처</td><td><strong>11.9%</strong></td><td>0%</td><td>완전 일방향</td></tr>
+  <tr><td>분노 <span class="arrow-right">→</span> 불안</td><td><strong>8.8%</strong></td><td>0%</td><td>완전 일방향</td></tr>
+  <tr><td>슬픔 <span class="arrow-right">→</span> 불안</td><td><strong>7.7%</strong></td><td>0%</td><td>완전 일방향</td></tr>
+  <tr><td>슬픔 <span class="arrow-right">→</span> 중립</td><td><strong>7.1%</strong></td><td>2.2%</td><td>비대칭</td></tr>
+  <tr><td>기쁨 <span class="arrow-both">↔</span> 중립</td><td>1.6%</td><td>1.6%</td><td>유일한 대칭</td></tr>
+</table>
+
+<div class="insight-box">
+<strong>핵심 발견:</strong> 부정 감정은 "강→약" 방향으로만 혼동됨. 슬픔이 상처로, 분노가 불안으로 읽히지만 역방향은 발생하지 않음. 이는 한국 문화에서 <strong>강한 부정 감정이 절제되어 표현되는 경향</strong>의 반영.
+</div>
+
+<div class="figure-container">
+  <img src="16_asymmetric_confusion_flow.png" alt="Asymmetric Confusion Flow">
+  <div class="figure-caption">그림 3. 감정 간 혼동의 비대칭 흐름도 (화살표 굵기는 혼동 비율에 비례)</div>
+</div>
+
+<div class="figure-container">
+  <img src="14_annotator_confusion_flow.png" alt="Annotator Confusion Flow">
+  <div class="figure-caption">그림 4. Annotator 라벨 불일치 상위 12개 흐름 (건수 기준)</div>
+</div>
+
+<!-- 5.3 -->
+<h3>5.3 전문인(배우) vs 일반인</h3>
+
+<table>
+  <tr><th>감정</th><th>전문인 인식률</th><th>일반인 인식률</th><th>차이</th></tr>
+  <tr><td>기쁨</td><td>95.9%</td><td><strong>96.4%</strong></td><td>-0.5%p</td></tr>
+  <tr><td>분노</td><td>67.3%</td><td><strong>73.0%</strong></td><td><strong>-5.7%p</strong></td></tr>
+  <tr><td>슬픔</td><td>67.3%</td><td><strong>69.0%</strong></td><td>-1.7%p</td></tr>
+  <tr><td>중립</td><td>87.6%</td><td><strong>89.8%</strong></td><td>-2.2%p</td></tr>
+</table>
+
+<p>chi²=215, p=9.5×10<sup>-49</sup></p>
+
+<div class="insight-box">
+<strong>핵심 발견:</strong> 모든 감정에서 일반인이 배우보다 높은 인식률을 보임. 특히 분노에서 5.7%p 차이. <strong>자연스러운 감정 표현이 의도된 연기보다 명확하게 인식됨.</strong>
+</div>
+
+<div class="figure-container">
+  <img src="17_professional_vs_general.png" alt="Professional vs General">
+  <div class="figure-caption">그림 5. 전문인(배우) vs 일반인 감정 인식 정확도 비교</div>
+</div>
+
+<!-- 5.4 -->
+<h3>5.4 피험자 성별 차이</h3>
+
+<table>
+  <tr><th>감정</th><th>여성</th><th>남성</th><th>차이</th></tr>
+  <tr><td>기쁨</td><td><strong>96.5%</strong></td><td>95.7%</td><td>+0.8%p</td></tr>
+  <tr><td>분노</td><td>67.9%</td><td><strong>73.2%</strong></td><td><strong>-5.3%p</strong></td></tr>
+  <tr><td>슬픔</td><td>66.5%</td><td><strong>70.3%</strong></td><td><strong>-3.8%p</strong></td></tr>
+  <tr><td>중립</td><td>88.2%</td><td><strong>89.5%</strong></td><td>-1.3%p</td></tr>
+</table>
+
+<p>chi²=169, p=1.9×10<sup>-37</sup></p>
+
+<div class="figure-container">
+  <img src="18_gender_comparison.png" alt="Gender Comparison">
+  <div class="figure-caption">그림 6. 피험자 성별에 따른 감정 인식 정확도</div>
+</div>
+
+<!-- 5.5 -->
+<h3>5.5 나이대별 차이</h3>
+
+<table>
+  <tr><th>감정</th><th>10대</th><th>20대</th><th>30대</th><th>40대</th><th>50대</th><th>60대</th></tr>
+  <tr><td>기쁨</td><td>97.4</td><td>96.1</td><td>95.9</td><td>97.5</td><td>94.9</td><td>98.2</td></tr>
+  <tr><td>분노</td><td>72.0</td><td><strong>69.1</strong></td><td>70.8</td><td>71.8</td><td><strong>78.3</strong></td><td>75.4</td></tr>
+  <tr><td>슬픔</td><td>74.4</td><td><strong>67.0</strong></td><td>68.3</td><td>70.7</td><td>71.7</td><td><strong>85.9</strong></td></tr>
+  <tr><td>중립</td><td>91.4</td><td>89.5</td><td>88.2</td><td>87.3</td><td>87.1</td><td>85.8</td></tr>
+</table>
+
+<div class="insight-box">
+<strong>핵심 발견:</strong> 20대의 슬픔 인식률이 67.0%로 최저. 60대(85.9%)와 <strong>18.9%p 차이</strong>. 나이가 들수록 부정 감정 표현이 명확해지는 경향.
+</div>
+
+<div class="figure-container">
+  <img src="19_age_emotion_recognition.png" alt="Age Emotion Recognition">
+  <div class="figure-caption">그림 7. 나이대별 분노/슬픔 인식 정확도</div>
+</div>
+
+<!-- 5.6 -->
+<h3>5.6 평가자 피로도 효과</h3>
+
+<table>
+  <tr><th>세트 구간</th><th>평균 "아님" 선택률</th></tr>
+  <tr><td>초반 (1-30)</td><td><strong>12.3%</strong></td></tr>
+  <tr><td>중반 (31-60)</td><td>11.5%</td></tr>
+  <tr><td>후반 (61-90)</td><td><strong>11.0%</strong></td></tr>
+</table>
+
+<p>Pearson r = -0.633, p ≈ 0</p>
+
+<div class="figure-container">
+  <img src="20_fatigue_effect.png" alt="Fatigue Effect">
+  <div class="figure-caption">그림 8. 세트 번호별 rejection rate 추이 (r=-0.633, 피로도 효과 확인)</div>
+</div>
+
+<!-- 5.7 -->
+<h3>5.7 피험자 내 감정 간 상관</h3>
+
+<table>
+  <tr><th>감정 쌍</th><th>r</th><th>해석</th></tr>
+  <tr><td>분노 × 슬픔</td><td><strong>0.340</strong></td><td>부정 감정 표현력이 피험자 수준 특성</td></tr>
+  <tr><td>기쁨 × 슬픔</td><td>0.207</td><td>약한 상관</td></tr>
+  <tr><td>기쁨 × 분노</td><td>0.129</td><td>약한 상관</td></tr>
+  <tr><td>슬픔 × 중립</td><td>-0.081</td><td>거의 독립</td></tr>
+</table>
+
+<h3>5.8 유효하지 않은 변수</h3>
+<p>다음 변수들은 "아님" 선택과 유의한 관계가 확인되지 않아 분석에서 제외하였다:</p>
+<ul>
+  <li>촬영 프레임 번호: rejection 10.4~12.2% — 차이 미미</li>
+  <li>촬영 배경/장소: rejection 10.6~12.3% — 차이 미미</li>
+  <li>피험자 나이 (연속 변수): t=-1.22, p=0.224 — 비유의</li>
+</ul>
+
+<!-- ============================================================ -->
+<div class="page-break"></div>
+<h2 id="sec6">6. 교차검증</h2>
+
+<h3>6.1 3중 신호 교차 조합</h3>
+<p>annotator 일치 × majority=uploader × 전문인 여부의 조합별 "아님" 선택률:</p>
+
+<div class="figure-container">
+  <img src="21_three_signal_crossval.png" alt="Three Signal Cross-validation">
+  <div class="figure-caption">그림 9. 3중 신호 조합별 rejection rate (최저 8.7% ~ 최고 21.5%)</div>
+</div>
+
+<h3>6.2 5개 독립 신호의 일관성</h3>
+<p>서로 독립적으로 측정된 5개 신호가 전부 같은 감정 순서를 보임:</p>
+
+<div class="figure-container">
+  <img src="12_five_signal_consistency.png" alt="Five Signal Consistency">
+  <div class="figure-caption">그림 10. 5개 독립 신호의 감정별 quality score — 전부 동일 순서로 일관</div>
+</div>
+
+<h3>6.3 Inter-rater Agreement</h3>
+
+<div class="figure-container">
+  <img src="22_inter_rater_agreement.png" alt="Inter-rater Agreement">
+  <div class="figure-caption">그림 11. 2명 이상 평가 사진의 평가자 간 일치율 (전체 98.7%)</div>
+</div>
+
+<div class="insight-box">
+<strong>교차검증 결론:</strong> 5개 독립 신호가 전부 같은 순서(기쁨 > 중립 > 분노/슬픔)로 일관. 2인 교차 평가 일치율 98.7%. 본 분석에서 도출된 경향성은 통계적으로 유의하며 재현 가능.
+</div>
+
+<!-- ============================================================ -->
+<div class="page-break"></div>
+<h2 id="sec7">7. 해석 및 시사점</h2>
+
+<h3>7.1 한국인 감정 표현의 문화적 특성</h3>
+
+<ol>
+  <li><strong>긍정 감정(기쁨)은 보편적</strong> — 성별/나이/전문성에 관계없이 96%+ 인식. 문화 보편적 기본 감정.</li>
+  <li><strong>부정 감정의 "강→약" 일방향 혼동</strong> — 슬픔이 상처로, 분노가 불안으로 읽히지만 역방향은 없음. 한국 문화에서 강한 부정 감정이 절제되어 표현되는 경향의 반영.</li>
+  <li><strong>남성의 부정 감정이 더 명확</strong> — 분노 +5.3%p, 슬픔 +3.8%p. 한국 사회에서 여성의 부정 감정 표현에 대한 사회적 규범의 영향.</li>
+  <li><strong>젊은 세대일수록 부정 감정이 모호</strong> — 20대 슬픔 67% vs 60대 86%. 세대 간 감정 표현 방식의 변화.</li>
+  <li><strong>자연스러운 표현 > 연기된 표현</strong> — 배우보다 일반인의 인식률이 높음. 훈련된 감정 표현이 한국적 감정 코드와 괴리될 수 있음.</li>
+</ol>
+
+<h3>7.2 감정 인식 시스템 설계에 대한 함의</h3>
+
+<ol>
+  <li><strong>7감정 분류의 현실적 상한</strong>: annotator 일치율 기준으로 슬픔/분노는 68-70%가 인간 수준 상한. 이를 크게 초과하는 자동 인식 성능은 기대하기 어려움.</li>
+  <li><strong>부정 감정 세분류의 한계</strong>: 슬픔↔상처↔불안은 표정만으로 구분이 구조적으로 어려움. 음성, 생체신호, 상황 맥락 등 추가 정보원이 필요.</li>
+  <li><strong>인구통계 보정 필요</strong>: 젊은 여성의 부정 감정 인식률이 가장 낮으므로, 성별/나이별 모델 보정 또는 별도 임계값 적용 고려.</li>
+  <li><strong>데이터 수집 전략</strong>: 전문인(배우) 촬영이 반드시 고품질 데이터를 보장하지 않음. 자연스러운 감정 유도 환경이 더 효과적.</li>
+</ol>
+
+</body>
+</html>

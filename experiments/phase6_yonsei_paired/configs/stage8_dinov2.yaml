@@ -1,0 +1,55 @@
+# Phase 6 Stage 8 — DINOv2 global encoder swap (Sapiens-line strong representation)
+# Patch encoder remains MobileNetV4-small (96 doesn't divide 14 cleanly).
+# Global encoder uses vit_small_patch14_dinov2 (224×224 standard input).
+seed: 42
+paths:
+  train_csv: "/home/ajy/AU-RegionFormer/experiments/phase6_yonsei_paired/csvs/master_train.csv"
+  val_csv:   "/home/ajy/AU-RegionFormer/experiments/phase6_yonsei_paired/csvs/master_val.csv"
+  output_dir: "/mnt/hdd/ajy_25/results/phase6_stage8_dinov2"
+model:
+  version: "v2"
+  pretrained: true
+  d_emb: 384
+  n_heads: 8
+  n_fusion_layers: 1
+  dropout: 0.1
+  gate_init: 0.0
+  num_classes: 4
+  head_dropout: 0.2
+  v2:
+    global_encoder: "vit_small_patch14_dinov2.lvd142m"   # ← DINOv2-small (22M)
+    patch_encoder: "mobilenetv4_conv_small"
+    patch_size: 96
+    use_stage_a: true
+    stage_a_layers: 1
+    stage_a_heads: 8
+    use_stage_b: true
+    use_iso: true
+    use_rel: true
+    combine: "weighted"
+    tau_init: 2.0
+    tau_end: 1.0
+training:
+  epochs: 30
+  batch_size: 128                # split between 128 (others) and 64 — single hyperparam shift only via lr
+  num_workers: 12
+  optimizer: "adamw"
+  base_lr: 3.5e-4                 # lower lr for DINOv2 pretrained stability (only HP changed vs others)
+  weight_decay: 0.05
+  scheduler: "cosine_warmup"
+  warmup_ratio: 0.05
+  min_lr: 1e-6
+  loss: "focal"
+  focal_gamma: 2.0
+  freeze_backbone_epochs: 2
+  backbone_lr_scale: 0.1
+  grad_clip_norm: 5.0
+  amp: true
+  early_stop_patience: 5
+  save_every: 10
+  metric: "f1_macro"
+  beta_anchor_weight: 2.0
+  beta_var_weight: 0.5
+augmentation:
+  global_img_size: 224
+  normalize: "from_model"

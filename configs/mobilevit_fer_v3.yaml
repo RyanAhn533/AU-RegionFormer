@@ -1,0 +1,85 @@
+# ─── AU-RegionFormer v3 Training Config ───
+# v2 대비 변경:
+#   - DropPath 0.15 (fusion layer stochastic depth)
+#   - Label Smoothing 0.1 (Focal Loss에 통합)
+#   - Manifold MixUp α=0.2 (backbone feature space)
+#   - Self-Distillation (EMA teacher → KL loss)
+#   - Cosine Warm Restart (30 epoch 주기)
+#   - Early Stopping (patience 25)
+#
+# v2 결과: best F1=0.8049 (ep19), train 97.8% vs val 80.6% = 17%p overfitting
+# v3 목표: overfitting 해소 → val F1 > 0.83
+
+seed: 42
+
+paths:
+  train_csv: "/mnt/hdd/ajy_25/au_csv/index_train.csv"
+  val_csv: "/mnt/hdd/ajy_25/au_csv/index_val.csv"
+  output_dir: "/home/ajy/AU-RegionFormer/outputs/v3"
+
+# ─── Model ───
+model:
+  backbone: "mobilevitv2_150"
+  pretrained: true
+  d_emb: 384
+
+  roi_mode: "bilinear"
+  roi_spatial: 1
+
+  n_heads: 8
+  n_fusion_layers: 2
+  dropout: 0.15              # v2: 0.1 → v3: 0.15
+  gate_init: 0.0
+  drop_path: 0.15            # NEW: stochastic depth
+
+  num_classes: 7
+  head_dropout: 0.3           # v2: 0.2 → v3: 0.3
+
+# ─── Training ───
+training:
+  epochs: 100                 # v2: 200 → v3: 100 (early stop이 잡아줌)
+  batch_size: 64
+  num_workers: 8
+
+  optimizer: "adamw"
+  base_lr: 3e-4
+  weight_decay: 0.05
+
+  # Scheduler: Cosine Warm Restart
+  scheduler: "cosine_warm_restart"
+  warmup_ratio: 0.05
+  min_lr: 1e-6
+  restart_epochs: 30          # NEW: 30 epoch마다 restart
+
+  # Loss
+  loss: "focal"
+  focal_gamma: 2.0
+  label_smoothing: 0.1        # NEW: v2: 0.0 → v3: 0.1
+
+  # Backbone strategy
+  freeze_backbone_epochs: 3
+  backbone_lr_scale: 0.1
+
+  # Regularization
+  grad_clip_norm: 5.0
+  mixup_alpha: 0.2            # NEW: Manifold MixUp
+  amp: true
+
+  # EMA
+  ema: true
+  ema_decay: 0.9998
+
+  # Self-Distillation
+  distill_alpha: 0.3          # NEW: KL loss weight
+  distill_temp: 4.0           # NEW: temperature
+
+  # Early Stopping
+  early_stop_patience: 25     # NEW: 25 epoch no improve → stop
+
+  save_every: 10
+  metric: "f1_macro"
+
+# ─── Augmentation ───
+augmentation:
+  global_img_size: 224
+  normalize: "from_model"

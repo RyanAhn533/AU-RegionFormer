@@ -1,0 +1,54 @@
+# ─── 7-class baseline (no Beta) — control run for Beta comparison ───
+
+seed: 42
+
+paths:
+  raw_train: "/home/ajy/AI_hub_250704/data2/data_processed_korea"
+  raw_val: "/home/ajy/AI_hub_250704/data2/data_processed_korea_validation"
+  csv_dir: "/mnt/hdd/ajy_25/au_csv"
+  train_csv: "/mnt/hdd/ajy_25/au_csv/index_train.csv"
+  val_csv: "/mnt/hdd/ajy_25/au_csv/index_val.csv"
+  output_dir: "/mnt/hdd/ajy_25/results/mobilevit_fer_7c_base"
+
+preprocess:
+  work_short_side: 800
+  workers: 12
+
+model:
+  backbone: "mobilevitv2_100"
+  pretrained: true
+  d_emb: 384
+  roi_mode: "bilinear"
+  roi_spatial: 1
+  n_heads: 8
+  n_fusion_layers: 1
+  dropout: 0.1
+  gate_init: 0.0
+  num_classes: 7
+  head_dropout: 0.2
+  use_beta: false
+
+training:
+  epochs: 50
+  batch_size: 192
+  num_workers: 12
+  early_stop_patience: 8
+  optimizer: "adamw"
+  base_lr: 5e-4
+  weight_decay: 0.05
+  scheduler: "cosine_warmup"
+  warmup_ratio: 0.05
+  min_lr: 1e-6
+  loss: "focal"
+  focal_gamma: 2.0
+  label_smoothing: 0.0
+  freeze_backbone_epochs: 3
+  backbone_lr_scale: 0.1
+  grad_clip_norm: 5.0
+  amp: true
+  save_every: 10
+  metric: "f1_macro"
+
+augmentation:
+  global_img_size: 224
+  normalize: "from_model"

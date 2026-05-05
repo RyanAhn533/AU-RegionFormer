@@ -1,28 +1,61 @@
-# Experiment History (local archive, not for GitHub)
-experiment_history/
-
-# Data & Checkpoints
-data/
+# === Large binaries / model weights (do NOT commit) ===
 *.pt
 *.pth
 *.ckpt
 *.pkl
-*.npy
-*.npz
 *.h5
 *.hdf5
 *.zip
 *.tar.gz
 
-# Outputs
-checkpoints*/
-output*/
-outputs/
-results/*.pt
-results/*.npy
-paper_artifacts/
+# === Image / embedding caches (large) ===
+data/label_quality/au_embeddings/*.npy
+data/label_quality/au_features/*.parquet
+data/label_quality/face_features.csv.part_*
+*.npz
 
-# Python
+# === Phase 6 large data (csvs, logs, sanity jsonl) ===
+experiments/phase6_yonsei_paired/csvs_v2/
+experiments/phase6_yonsei_paired/csvs_v3/
+experiments/phase6_yonsei_paired/csvs/master_*.csv
+experiments/phase6_yonsei_paired/csvs/train_yonsei_*.csv
+experiments/phase6_yonsei_paired/csvs/val_yonsei_*.csv
+experiments/phase6_yonsei_paired/csvs/crossdataset/*.csv
+experiments/phase6_yonsei_paired/logs/
+experiments/phase6_yonsei_paired/results/xeval_*/
+experiments/phase6_yonsei_paired/results/stage9_*/
+experiments/phase6_yonsei_paired/results/finetune_eval_*/
+
+# === Raw outputs (large) ===
+outputs/v2/
+outputs/v3/
+outputs/v5_softlabel/
+outputs/4emo_before/
+outputs/4emo_after/
+outputs/label_quality/
+outputs/phase0/02_opengraphau/
+outputs/phase0/01_au_embedding_diag/umap_*.png
+outputs/phase0/01_au_embedding_diag/cossim_*.png
+
+# === Include small results/figures (override above) ===
+!outputs/phase0/**/summary.md
+!outputs/phase0/**/results.json
+!outputs/phase0/**/metrics.json
+!outputs/phase0/**/linear_probe_acc.png
+!outputs/phase0/**/cm_pooled_*.png
+!outputs/phase0/**/per_region_raw_vs_clean.png
+!outputs/phase0/**/fairness_gap.png
+!outputs/phase0/**/per_region_ranking.png
+
+# === OpenGraphAU library (external, don't commit) ===
+libs/OpenGraphAU/checkpoints/
+libs/OpenGraphAU/pretrain_models/
+libs/OpenGraphAU/results/
+
+# === Experiment history (local archive only) ===
+experiment_history/
+
+# === Python ===
 __pycache__/
 *.pyc
 *.pyo
@@ -30,15 +63,19 @@ __pycache__/
 *.egg-info/
 *.egg
 
-# IDE
+# === IDE / OS ===
 .vscode/
 .idea/
 *.swp
 *.swo
-
-# OS
 .DS_Store
 Thumbs.db
-
-# Jupyter
 .ipynb_checkpoints/
+
+# === Logs ===
+*.log
+!outputs/phase0/**/run*.log
+
+# === tmp ===
+/tmp/
+nohup.out

@@ -1,0 +1,66 @@
+# ─── AU-RegionFormer v2 Training Config ───
+# 구조적 업그레이드: AU self-attention, CLS+Global head, EMA, backbone scaling
+# v1 대비 변경: backbone(mobilevitv2_150), fusion 2-layer, EMA, d_emb 유지
+
+seed: 42
+
+paths:
+  raw_train: "/home/ajy/AI_hub_250704/data2/data_processed_korea"
+  raw_val: "/home/ajy/AI_hub_250704/data2/data_processed_korea_validation"
+  csv_dir: "/mnt/hdd/ajy_25/au_csv"
+  train_csv: "/mnt/hdd/ajy_25/au_csv/index_train.csv"
+  val_csv: "/mnt/hdd/ajy_25/au_csv/index_val.csv"
+  output_dir: "/home/ajy/AU-RegionFormer/outputs/v2"
+
+# ─── Model ───
+model:
+  backbone: "mobilevitv2_150"     # 9.8M, d=768 (v1: mobilevitv2_100, 4.4M, d=512)
+  pretrained: true
+  d_emb: 384                     # projection target dim (backbone → d_emb)
+
+  roi_mode: "bilinear"
+  roi_spatial: 1
+
+  n_heads: 8
+  n_fusion_layers: 2             # v1: 1 → v2: 2 layers
+  dropout: 0.1
+  gate_init: 0.0
+
+  num_classes: 7
+  head_dropout: 0.2
+
+# ─── Training ───
+training:
+  epochs: 200
+  batch_size: 64
+  num_workers: 8
+
+  optimizer: "adamw"
+  base_lr: 3e-4
+  weight_decay: 0.05
+
+  scheduler: "cosine_warmup"
+  warmup_ratio: 0.05
+  min_lr: 1e-6
+
+  loss: "focal"
+  focal_gamma: 2.0
+  label_smoothing: 0.0
+
+  freeze_backbone_epochs: 3
+  backbone_lr_scale: 0.1
+
+  grad_clip_norm: 5.0
+  amp: true
+
+  # EMA (new in v2)
+  ema: true
+  ema_decay: 0.9998
+
+  save_every: 10
+  metric: "f1_macro"
+
+# ─── Augmentation ───
+augmentation:
+  global_img_size: 224
+  normalize: "from_model"

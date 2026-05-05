@@ -1,0 +1,69 @@
+# ─── AU-RegionFormer v4 baseline (no Beta) — control for Beta comparison ───
+# Identical to v4_beta_l2 except use_beta: false. Same hyperparams for fair A/B.
+
+seed: 42
+
+paths:
+  train_csv: "/mnt/hdd/ajy_25/au_csv/index_train.csv"
+  val_csv: "/mnt/hdd/ajy_25/au_csv/index_val.csv"
+  output_dir: "/mnt/hdd/ajy_25/results/v4_base"
+
+model:
+  backbone: "mobilevitv2_150"
+  pretrained: true
+  d_emb: 384
+
+  roi_mode: "bilinear"
+  roi_spatial: 3
+
+  n_heads: 8
+  n_fusion_layers: 2
+  dropout: 0.2
+  gate_init: 0.0
+  drop_path: 0.2
+
+  num_classes: 7
+  head_dropout: 0.35
+  use_au_pool: true
+
+  use_beta: false
+
+training:
+  epochs: 50
+  batch_size: 128
+  num_workers: 12
+
+  optimizer: "adamw"
+  base_lr: 3e-4
+  weight_decay: 0.08
+
+  scheduler: "cosine_warm_restart"
+  warmup_ratio: 0.05
+  min_lr: 1e-6
+  restart_epochs: 25
+
+  loss: "focal"
+  focal_gamma: 2.0
+  label_smoothing: 0.05
+
+  freeze_backbone_epochs: 5
+  backbone_lr_scale: 0.1
+
+  grad_clip_norm: 5.0
+  mixup_alpha: 0.3
+  amp: true
+
+  ema: true
+  ema_decay: 0.9997
+
+  distill_alpha: 0.3
+  distill_temp: 8.0
+
+  early_stop_patience: 10
+
+  save_every: 10
+  metric: "f1_macro"
+
+augmentation:
+  global_img_size: 224
+  normalize: "from_model"

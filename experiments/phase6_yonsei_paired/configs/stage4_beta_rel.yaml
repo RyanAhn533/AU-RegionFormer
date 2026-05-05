@@ -1,0 +1,50 @@
+# Phase 6 Stage 4 — v2 + Beta L2 relational only (AU↔Global agreement gate)
+seed: 42
+paths:
+  train_csv: "/home/ajy/AU-RegionFormer/experiments/phase6_yonsei_paired/csvs/master_train.csv"
+  val_csv:   "/home/ajy/AU-RegionFormer/experiments/phase6_yonsei_paired/csvs/master_val.csv"
+  output_dir: "/mnt/hdd/ajy_25/results/phase6_stage4_beta_rel"
+model:
+  version: "v2"
+  pretrained: true
+  d_emb: 384
+  n_heads: 8
+  n_fusion_layers: 1
+  dropout: 0.1
+  gate_init: 0.0
+  num_classes: 4
+  head_dropout: 0.2
+  v2:
+    global_encoder: "mobilenetv4_conv_medium"
+    patch_encoder: "mobilenetv4_conv_small"
+    patch_size: 96
+    use_stage_a: false
+    use_stage_b: true
+    use_iso: false
+    use_rel: true
+    combine: "rel_only"
+    tau_init: 2.0
+    tau_end: 1.0
+training:
+  epochs: 30
+  batch_size: 128
+  num_workers: 12
+  optimizer: "adamw"
+  base_lr: 5e-4
+  weight_decay: 0.05
+  scheduler: "cosine_warmup"
+  warmup_ratio: 0.05
+  min_lr: 1e-6
+  loss: "focal"
+  focal_gamma: 2.0
+  label_smoothing: 0.0
+  freeze_backbone_epochs: 2
+  backbone_lr_scale: 0.1
+  grad_clip_norm: 5.0
+  amp: true
+  early_stop_patience: 5
+  save_every: 10
+  metric: "f1_macro"
+augmentation:
+  global_img_size: 224
+  normalize: "from_model"

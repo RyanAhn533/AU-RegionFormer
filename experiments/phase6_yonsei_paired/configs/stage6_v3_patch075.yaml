@@ -1,0 +1,61 @@
+seed: 42
+paths:
+  train_csv: /home/ajy/AU-RegionFormer/experiments/phase6_yonsei_paired/csvs_v3/master_train_v3.csv
+  val_csv: /home/ajy/AU-RegionFormer/experiments/phase6_yonsei_paired/csvs_v3/master_val_v3.csv
+  output_dir: /mnt/hdd/ajy_25/results/phase6_stage6_v3_patch075
+model:
+  version: v2
+  pretrained: true
+  d_emb: 384
+  n_heads: 8
+  n_fusion_layers: 1
+  dropout: 0.2
+  gate_init: 0.0
+  drop_path: 0.2
+  num_classes: 4
+  head_dropout: 0.35
+  v2:
+    global_encoder: mobilenetv4_conv_medium
+    patch_encoder: mobilenetv4_conv_small
+    patch_size: 96
+    use_stage_a: true
+    stage_a_layers: 1
+    stage_a_heads: 8
+    use_stage_b: true
+    use_iso: true
+    use_rel: true
+    combine: weighted
+    tau_init: 2.0
+    tau_end: 1.0
+training:
+  epochs: 30
+  batch_size: 256
+  num_workers: 12
+  optimizer: adamw
+  base_lr: 7e-4
+  weight_decay: 0.1
+  scheduler: cosine_warmup
+  warmup_ratio: 0.05
+  min_lr: 1e-6
+  loss: focal
+  focal_gamma: 2.0
+  label_smoothing: 0.05
+  freeze_backbone_epochs: 3
+  backbone_lr_scale: 0.1
+  grad_clip_norm: 5.0
+  amp: true
+  mixup_alpha: 0.3
+  ema: true
+  ema_decay: 0.9997
+  distill_alpha: 0.3
+  distill_temp: 8.0
+  early_stop_patience: 8
+  save_every: 10
+  metric: f1_macro
+  beta_anchor_weight: 2.0
+  beta_var_weight: 0.5
+augmentation:
+  global_img_size: 224
+  normalize: from_model
+dataset:
+  patch_scale: 0.75
