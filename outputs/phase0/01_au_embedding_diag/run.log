@@ -1,0 +1,715 @@
+2026-04-21 12:17:06.419697: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-04-21 12:17:06.510357: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1776741426.549798 1229723 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1776741426.562558 1229723 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1776741426.636004 1229723 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1776741426.636031 1229723 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1776741426.636033 1229723 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1776741426.636035 1229723 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+2026-04-21 12:17:06.646819: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI AVX512_BF16 AVX512_FP16 AVX_VNNI AMX_TILE AMX_INT8 AMX_BF16 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+
+============================================================
+Backbone: mobilevitv2_150
+============================================================
+  Samples: 237348, Classes: ['기쁨', '분노', '슬픔', '중립']
+
+  [eyes_left]
+    silhouette(cos)=-0.0196, inter-cos-sim mean=0.9842, PCA top10 cum=0.452
+    UMAP...
+/home/ajy/miniconda3/lib/python3.12/site-packages/umap/umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
+/home/ajy/miniconda3/lib/python3.12/site-packages/numba/np/ufunc/parallel.py:373: NumbaWarning: [1mThe TBB threading layer requires TBB version 2021 update 6 or later i.e., TBB_INTERFACE_VERSION >= 12060. Found TBB_INTERFACE_VERSION = 12050. The TBB threading layer is disabled.[0m
+  warnings.warn(problem)
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 49256 (\N{HANGUL SYLLABLE BBEUM}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 45432 (\N{HANGUL SYLLABLE NO}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 49836 (\N{HANGUL SYLLABLE SEUL}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 54548 (\N{HANGUL SYLLABLE PEUM}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 47549 (\N{HANGUL SYLLABLE RIB}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 49256 (\N{HANGUL SYLLABLE BBEUM}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 45432 (\N{HANGUL SYLLABLE NO}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 49836 (\N{HANGUL SYLLABLE SEUL}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 54548 (\N{HANGUL SYLLABLE PEUM}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 47549 (\N{HANGUL SYLLABLE RIB}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+
+  [eyes_right]
+    silhouette(cos)=-0.0232, inter-cos-sim mean=0.9860, PCA top10 cum=0.444
+    UMAP...
+/home/ajy/miniconda3/lib/python3.12/site-packages/umap/umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 49256 (\N{HANGUL SYLLABLE BBEUM}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 45432 (\N{HANGUL SYLLABLE NO}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 49836 (\N{HANGUL SYLLABLE SEUL}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 54548 (\N{HANGUL SYLLABLE PEUM}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 47549 (\N{HANGUL SYLLABLE RIB}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 49256 (\N{HANGUL SYLLABLE BBEUM}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 45432 (\N{HANGUL SYLLABLE NO}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 49836 (\N{HANGUL SYLLABLE SEUL}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 54548 (\N{HANGUL SYLLABLE PEUM}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 47549 (\N{HANGUL SYLLABLE RIB}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+
+  [nose]
+    silhouette(cos)=-0.0059, inter-cos-sim mean=0.9566, PCA top10 cum=0.515
+    UMAP...
+/home/ajy/miniconda3/lib/python3.12/site-packages/umap/umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 49256 (\N{HANGUL SYLLABLE BBEUM}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 45432 (\N{HANGUL SYLLABLE NO}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 49836 (\N{HANGUL SYLLABLE SEUL}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 54548 (\N{HANGUL SYLLABLE PEUM}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 47549 (\N{HANGUL SYLLABLE RIB}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 49256 (\N{HANGUL SYLLABLE BBEUM}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 45432 (\N{HANGUL SYLLABLE NO}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 49836 (\N{HANGUL SYLLABLE SEUL}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 54548 (\N{HANGUL SYLLABLE PEUM}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 47549 (\N{HANGUL SYLLABLE RIB}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+
+  [mouth]
+    silhouette(cos)=0.0094, inter-cos-sim mean=0.9425, PCA top10 cum=0.506
+    UMAP...
+/home/ajy/miniconda3/lib/python3.12/site-packages/umap/umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 49256 (\N{HANGUL SYLLABLE BBEUM}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 45432 (\N{HANGUL SYLLABLE NO}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 49836 (\N{HANGUL SYLLABLE SEUL}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 54548 (\N{HANGUL SYLLABLE PEUM}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 47549 (\N{HANGUL SYLLABLE RIB}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 49256 (\N{HANGUL SYLLABLE BBEUM}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 45432 (\N{HANGUL SYLLABLE NO}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 49836 (\N{HANGUL SYLLABLE SEUL}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 54548 (\N{HANGUL SYLLABLE PEUM}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 47549 (\N{HANGUL SYLLABLE RIB}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+
+  [forehead]
+    silhouette(cos)=-0.0085, inter-cos-sim mean=0.9887, PCA top10 cum=0.407
+    UMAP...
+/home/ajy/miniconda3/lib/python3.12/site-packages/umap/umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 49256 (\N{HANGUL SYLLABLE BBEUM}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 45432 (\N{HANGUL SYLLABLE NO}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 49836 (\N{HANGUL SYLLABLE SEUL}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 54548 (\N{HANGUL SYLLABLE PEUM}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 47549 (\N{HANGUL SYLLABLE RIB}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 49256 (\N{HANGUL SYLLABLE BBEUM}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 45432 (\N{HANGUL SYLLABLE NO}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 49836 (\N{HANGUL SYLLABLE SEUL}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 54548 (\N{HANGUL SYLLABLE PEUM}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 47549 (\N{HANGUL SYLLABLE RIB}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+
+  [chin]
+    silhouette(cos)=-0.0087, inter-cos-sim mean=0.9806, PCA top10 cum=0.408
+    UMAP...
+/home/ajy/miniconda3/lib/python3.12/site-packages/umap/umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 49256 (\N{HANGUL SYLLABLE BBEUM}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 45432 (\N{HANGUL SYLLABLE NO}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 49836 (\N{HANGUL SYLLABLE SEUL}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 54548 (\N{HANGUL SYLLABLE PEUM}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 47549 (\N{HANGUL SYLLABLE RIB}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 49256 (\N{HANGUL SYLLABLE BBEUM}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 45432 (\N{HANGUL SYLLABLE NO}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 49836 (\N{HANGUL SYLLABLE SEUL}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 54548 (\N{HANGUL SYLLABLE PEUM}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 47549 (\N{HANGUL SYLLABLE RIB}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+
+  [cheek_left]
+    silhouette(cos)=-0.0012, inter-cos-sim mean=0.9771, PCA top10 cum=0.431
+    UMAP...
+/home/ajy/miniconda3/lib/python3.12/site-packages/umap/umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 49256 (\N{HANGUL SYLLABLE BBEUM}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 45432 (\N{HANGUL SYLLABLE NO}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 49836 (\N{HANGUL SYLLABLE SEUL}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 54548 (\N{HANGUL SYLLABLE PEUM}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 47549 (\N{HANGUL SYLLABLE RIB}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 49256 (\N{HANGUL SYLLABLE BBEUM}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 45432 (\N{HANGUL SYLLABLE NO}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 49836 (\N{HANGUL SYLLABLE SEUL}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 54548 (\N{HANGUL SYLLABLE PEUM}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 47549 (\N{HANGUL SYLLABLE RIB}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+
+  [cheek_right]
+    silhouette(cos)=0.0015, inter-cos-sim mean=0.9789, PCA top10 cum=0.454
+    UMAP...
+/home/ajy/miniconda3/lib/python3.12/site-packages/umap/umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 49256 (\N{HANGUL SYLLABLE BBEUM}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 45432 (\N{HANGUL SYLLABLE NO}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 49836 (\N{HANGUL SYLLABLE SEUL}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 54548 (\N{HANGUL SYLLABLE PEUM}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 47549 (\N{HANGUL SYLLABLE RIB}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 49256 (\N{HANGUL SYLLABLE BBEUM}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 45432 (\N{HANGUL SYLLABLE NO}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 49836 (\N{HANGUL SYLLABLE SEUL}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 54548 (\N{HANGUL SYLLABLE PEUM}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 47549 (\N{HANGUL SYLLABLE RIB}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+
+  [POOLED: concat 8 regions]
+    shape=(237348, 6144)
+    silhouette(cos)=0.0072, inter-cos-sim mean=0.9726
+    UMAP...
+/home/ajy/miniconda3/lib/python3.12/site-packages/umap/umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 49256 (\N{HANGUL SYLLABLE BBEUM}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 45432 (\N{HANGUL SYLLABLE NO}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 49836 (\N{HANGUL SYLLABLE SEUL}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 54548 (\N{HANGUL SYLLABLE PEUM}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 47549 (\N{HANGUL SYLLABLE RIB}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 49256 (\N{HANGUL SYLLABLE BBEUM}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 45432 (\N{HANGUL SYLLABLE NO}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 49836 (\N{HANGUL SYLLABLE SEUL}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 54548 (\N{HANGUL SYLLABLE PEUM}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 47549 (\N{HANGUL SYLLABLE RIB}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+
+============================================================
+Backbone: convnext_base.fb_in22k_ft_in1k
+============================================================
+  Samples: 237348, Classes: ['기쁨', '분노', '슬픔', '중립']
+
+  [eyes_left]
+    silhouette(cos)=-0.0197, inter-cos-sim mean=0.9794, PCA top10 cum=0.610
+    UMAP...
+/home/ajy/miniconda3/lib/python3.12/site-packages/umap/umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 49256 (\N{HANGUL SYLLABLE BBEUM}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 45432 (\N{HANGUL SYLLABLE NO}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 49836 (\N{HANGUL SYLLABLE SEUL}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 54548 (\N{HANGUL SYLLABLE PEUM}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 47549 (\N{HANGUL SYLLABLE RIB}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 49256 (\N{HANGUL SYLLABLE BBEUM}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 45432 (\N{HANGUL SYLLABLE NO}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 49836 (\N{HANGUL SYLLABLE SEUL}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 54548 (\N{HANGUL SYLLABLE PEUM}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 47549 (\N{HANGUL SYLLABLE RIB}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+
+  [eyes_right]
+    silhouette(cos)=-0.0210, inter-cos-sim mean=0.9785, PCA top10 cum=0.616
+    UMAP...
+/home/ajy/miniconda3/lib/python3.12/site-packages/umap/umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 49256 (\N{HANGUL SYLLABLE BBEUM}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 45432 (\N{HANGUL SYLLABLE NO}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 49836 (\N{HANGUL SYLLABLE SEUL}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 54548 (\N{HANGUL SYLLABLE PEUM}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 47549 (\N{HANGUL SYLLABLE RIB}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 49256 (\N{HANGUL SYLLABLE BBEUM}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 45432 (\N{HANGUL SYLLABLE NO}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 49836 (\N{HANGUL SYLLABLE SEUL}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 54548 (\N{HANGUL SYLLABLE PEUM}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 47549 (\N{HANGUL SYLLABLE RIB}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+
+  [nose]
+    silhouette(cos)=0.0026, inter-cos-sim mean=0.9596, PCA top10 cum=0.669
+    UMAP...
+/home/ajy/miniconda3/lib/python3.12/site-packages/umap/umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 49256 (\N{HANGUL SYLLABLE BBEUM}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 45432 (\N{HANGUL SYLLABLE NO}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 49836 (\N{HANGUL SYLLABLE SEUL}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 54548 (\N{HANGUL SYLLABLE PEUM}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 47549 (\N{HANGUL SYLLABLE RIB}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 49256 (\N{HANGUL SYLLABLE BBEUM}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 45432 (\N{HANGUL SYLLABLE NO}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 49836 (\N{HANGUL SYLLABLE SEUL}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 54548 (\N{HANGUL SYLLABLE PEUM}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 47549 (\N{HANGUL SYLLABLE RIB}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+
+  [mouth]
+    silhouette(cos)=0.0194, inter-cos-sim mean=0.9509, PCA top10 cum=0.629
+    UMAP...
+/home/ajy/miniconda3/lib/python3.12/site-packages/umap/umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 49256 (\N{HANGUL SYLLABLE BBEUM}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 45432 (\N{HANGUL SYLLABLE NO}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 49836 (\N{HANGUL SYLLABLE SEUL}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 54548 (\N{HANGUL SYLLABLE PEUM}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 47549 (\N{HANGUL SYLLABLE RIB}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 49256 (\N{HANGUL SYLLABLE BBEUM}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 45432 (\N{HANGUL SYLLABLE NO}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 49836 (\N{HANGUL SYLLABLE SEUL}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 54548 (\N{HANGUL SYLLABLE PEUM}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 47549 (\N{HANGUL SYLLABLE RIB}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+
+  [forehead]
+    silhouette(cos)=-0.0237, inter-cos-sim mean=0.9853, PCA top10 cum=0.528
+    UMAP...
+/home/ajy/miniconda3/lib/python3.12/site-packages/umap/umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 49256 (\N{HANGUL SYLLABLE BBEUM}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 45432 (\N{HANGUL SYLLABLE NO}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 49836 (\N{HANGUL SYLLABLE SEUL}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 54548 (\N{HANGUL SYLLABLE PEUM}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 47549 (\N{HANGUL SYLLABLE RIB}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 49256 (\N{HANGUL SYLLABLE BBEUM}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 45432 (\N{HANGUL SYLLABLE NO}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 49836 (\N{HANGUL SYLLABLE SEUL}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 54548 (\N{HANGUL SYLLABLE PEUM}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 47549 (\N{HANGUL SYLLABLE RIB}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+
+  [chin]
+    silhouette(cos)=-0.0147, inter-cos-sim mean=0.9841, PCA top10 cum=0.555
+    UMAP...
+/home/ajy/miniconda3/lib/python3.12/site-packages/umap/umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 49256 (\N{HANGUL SYLLABLE BBEUM}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 45432 (\N{HANGUL SYLLABLE NO}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 49836 (\N{HANGUL SYLLABLE SEUL}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 54548 (\N{HANGUL SYLLABLE PEUM}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 47549 (\N{HANGUL SYLLABLE RIB}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 49256 (\N{HANGUL SYLLABLE BBEUM}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 45432 (\N{HANGUL SYLLABLE NO}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 49836 (\N{HANGUL SYLLABLE SEUL}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 54548 (\N{HANGUL SYLLABLE PEUM}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 47549 (\N{HANGUL SYLLABLE RIB}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+
+  [cheek_left]
+    silhouette(cos)=0.0037, inter-cos-sim mean=0.9555, PCA top10 cum=0.572
+    UMAP...
+/home/ajy/miniconda3/lib/python3.12/site-packages/umap/umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 49256 (\N{HANGUL SYLLABLE BBEUM}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 45432 (\N{HANGUL SYLLABLE NO}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 49836 (\N{HANGUL SYLLABLE SEUL}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 54548 (\N{HANGUL SYLLABLE PEUM}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 47549 (\N{HANGUL SYLLABLE RIB}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 49256 (\N{HANGUL SYLLABLE BBEUM}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 45432 (\N{HANGUL SYLLABLE NO}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 49836 (\N{HANGUL SYLLABLE SEUL}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 54548 (\N{HANGUL SYLLABLE PEUM}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 47549 (\N{HANGUL SYLLABLE RIB}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+
+  [cheek_right]
+    silhouette(cos)=0.0037, inter-cos-sim mean=0.9541, PCA top10 cum=0.568
+    UMAP...
+/home/ajy/miniconda3/lib/python3.12/site-packages/umap/umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 49256 (\N{HANGUL SYLLABLE BBEUM}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 45432 (\N{HANGUL SYLLABLE NO}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 49836 (\N{HANGUL SYLLABLE SEUL}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 54548 (\N{HANGUL SYLLABLE PEUM}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 47549 (\N{HANGUL SYLLABLE RIB}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 49256 (\N{HANGUL SYLLABLE BBEUM}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 45432 (\N{HANGUL SYLLABLE NO}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 49836 (\N{HANGUL SYLLABLE SEUL}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 54548 (\N{HANGUL SYLLABLE PEUM}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 47549 (\N{HANGUL SYLLABLE RIB}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+
+  [POOLED: concat 8 regions]
+    shape=(237348, 8192)
+    silhouette(cos)=0.0113, inter-cos-sim mean=0.9676
+    UMAP...
+/home/ajy/miniconda3/lib/python3.12/site-packages/umap/umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 49256 (\N{HANGUL SYLLABLE BBEUM}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 45432 (\N{HANGUL SYLLABLE NO}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 49836 (\N{HANGUL SYLLABLE SEUL}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 54548 (\N{HANGUL SYLLABLE PEUM}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/miniconda3/lib/python3.12/site-packages/seaborn/utils.py:61: UserWarning: Glyph 47549 (\N{HANGUL SYLLABLE RIB}) missing from font(s) DejaVu Sans.
+  fig.canvas.draw()
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 49256 (\N{HANGUL SYLLABLE BBEUM}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 45432 (\N{HANGUL SYLLABLE NO}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 49836 (\N{HANGUL SYLLABLE SEUL}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 54548 (\N{HANGUL SYLLABLE PEUM}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+/home/ajy/AU-RegionFormer/src/analysis/phase0/01_au_embedding_diag.py:173: UserWarning: Glyph 47549 (\N{HANGUL SYLLABLE RIB}) missing from font(s) DejaVu Sans.
+  plt.savefig(out_path, dpi=120)
+
+============================================================
+Done. Output: /home/ajy/AU-RegionFormer/outputs/phase0/01_au_embedding_diag
+============================================================
+  [mobilevitv2_150] silhouette=0.0072 → NO-GO — Backbone 교체 검토
+  [convnext_base.fb_in22k_ft_in1k] silhouette=0.0113 → NO-GO — Backbone 교체 검토

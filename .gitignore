@@ -14,6 +14,20 @@ data/label_quality/au_features/*.parquet
 data/label_quality/face_features.csv.part_*
 *.npz
 
+# === Big raw data (datasets, features, embeddings) — never push ===
+data/4emotion_comparison/
+data/label_quality/all_photos.csv
+data/label_quality/face_features.csv
+data/label_quality/model_vs_human.csv
+data/label_quality/train.csv
+data/label_quality/train_features.npy
+data/label_quality/train_pred_probs.npy
+data/label_quality/train_labels.npy
+data/label_quality/sad_matching_sc.csv
+data/label_quality/val_consensus.csv
+data/label_quality/au_embeddings/*.csv
+data/label_quality/au_features/
+
 # === Phase 6 large data (csvs, logs, sanity jsonl) ===
 experiments/phase6_yonsei_paired/csvs_v2/
 experiments/phase6_yonsei_paired/csvs_v3/
