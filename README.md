@@ -2,7 +2,81 @@
 
 > **한국인 감정 표현 연구 — AI와 심리학의 괴리를 정량화한다.**
 
-**Last updated**: 2026-04-21 · **Phase**: 0.1 완료, 0.2 대기
+**Last updated**: 2026-05-05 · **Phase**: 6 v3 완료 (Q1 evidence 확보), ablation suite 진행 중
+
+---
+
+## 🚀 Phase 6 v3 — Cross-cultural transfer (2026-05-04 완료)
+
+### v2 → v3 fix (며칠 헛짓 → 정정)
+
+**문제 (v2, 5/1~5/3)**:
+- `master_train.csv`가 v4 schema의 multi-landmark를 8-region union-bbox로 collapse → forehead bbox 606×357px (face의 76%×26%)
+- Cross-dataset CSV: face crop 없이 mediapipe → SFEW/AFEW은 face가 frame 5%만 차지
+- **결과: region patch가 face 아닌 배경/머리카락/다른 사람 학습 → 모든 cross-cultural 결과 fake**
+
+**해결 (v3, 5/4~5/5)**: 옛날 v4 정확한 방식 복원
+```
+원본 → YOLOv8 face detection → bbox crop → save face image
+     → resize_short(800) → mediapipe FaceMesh
+     → 10 v4 single-landmark (forehead 69/299/9, eyes 159/386, nose 195,
+                              cheeks 186/410, mouth 13, chin 18)
+     → 256×256 patch around each landmark
+```
+
+### v3 결과 (Cross-cultural zero-shot, F1, chance=0.25)
+
+| Dataset | v2 fake (background) | **v3 real (face)** | Δ |
+|---|---|---|---|
+| AffectNet (16K) | 0.312 | **0.4946** | +18.3pp |
+| CK+ (lab posed) | 0.239 | **0.7169** | +47.8pp 🔥 |
+| SFEW Train (movie) | 0.178 | **0.5494** | +37.2pp 🔥 |
+| SFEW Val | 0.180 | 0.4929 | +31.3pp |
+| AFEW Train (video) | 0.218 | 0.4614 | +24.3pp |
+| AFEW Val | 0.220 | 0.3749 | +15.5pp |
+
+→ **모든 6 split 압도적 개선**. v2의 "SFEW/AFEW negative transfer" 결론은 fake (background 학습 artifact).
+→ **CK+ 0.72 = 거의 supervised level** (Korean naturalistic prior가 lab-controlled face에 강력 transfer).
+
+### AffectNet finetune (Korean prior vs ImageNet baseline)
+
+| | v2 | **v3** |
+|---|---|---|
+| Korean prior init (8ep) | 0.8794 | **0.8895** |
+| Scratch (ImageNet only) | 0.8342 | 0.8125 |
+| **Δ Korean prior advantage** | +4.5pp | **+7.7pp** |
+
+### Ablation suite (진행 중, 5/5~)
+
+| Phase | Variants | Status |
+|---|---|---|
+| Patch-scale | baseline 1.0 / patch125 1.25 / patch150 1.5 / forehead_big | 진행 중 (forehead_big saturating) |
+| AU subset | core6 / upper_face / lower_face | 대기 |
+| Single region | 10 spots (forehead 3 / eyes 2 / nose / cheeks 2 / mouth / chin) | 대기 |
+
+### Q1 framing (revised)
+
+> *"Korean Yonsei-calibrated 3-axis FER provides culturally-invariant AU
+> representation: all 4 Western datasets transfer at 1.5-3× chance F1
+> (CK+ near-supervised 0.72), and Korean prior gives +7.7pp over ImageNet
+> baseline on AffectNet finetune."*
+
+### Critical files
+
+- `src/models/core/fer_model_v2.py` — V2 multi-backbone + dual Beta gate
+- `src/models/core/relational_beta_gate.py` — Iso + Rel Beta gate
+- `src/data/dataset_v2.py` — AU patch crop, patch_scale option, region_subset
+- `src/training/trainer.py` — `--init_from`, bf16 autocast, region_subset config
+- `experiments/phase6_yonsei_paired/scripts/preprocess_v3_yolo_mediapipe.py` — YOLO+mediapipe v4 build
+- `experiments/phase6_yonsei_paired/scripts/merge_yonsei_v3.py` — Yonsei agreement signal merge
+- `experiments/phase6_yonsei_paired/results/AGGREGATED_RESULTS_v3.md` — full v3 report
+- `experiments/phase6_yonsei_paired/figures/v3_validation/` — preprocessing visualize 8장
+
+---
+
+## 📜 Pre-Phase 6 (2026-04-21 기준 옛 README)
+
+**Phase**: 0.1 완료, 0.2 대기
 
 ---
 
