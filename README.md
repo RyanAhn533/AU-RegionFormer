@@ -365,7 +365,7 @@ print(infer.predict(frame)['emotion'])
 ```
 
 ### 실전 배포
-Jetson Orin 기반 Driver Monitoring System에 통합 (10-item 프로토콜 Macro 98.0%)
+Jetson Orin 기반 Driver Monitoring System에 통합 (10-item 프로토콜 Macro 98.0% — 시뮬레이션 추정치, 실측 아님: DMS 저장소 `multimodal_dms/evaluate_demo.py` 의 confusion-matrix 기반 majority-vote 몬테카를로 시뮬레이션 + 상태 플래그 3항목 상수 목표치)
 
 ---
 
